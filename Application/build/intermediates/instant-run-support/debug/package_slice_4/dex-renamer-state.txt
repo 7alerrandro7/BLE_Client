@@ -1,0 +1,4 @@
+#Tue Apr 17 08:16:06 BRT 2018
+base.0=C\:\\Users\\Alessandro Faletti\\Downloads\\BluetoothLeGatt\\Application\\build\\intermediates\\transforms\\dexMerger\\debug\\24
+path.0=classes.dex
+renamed.0=classes.dex
