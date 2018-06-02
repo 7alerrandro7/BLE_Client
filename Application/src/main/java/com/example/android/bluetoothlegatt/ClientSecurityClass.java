@@ -1,18 +1,17 @@
 package com.example.android.bluetoothlegatt;
 
 import android.os.Environment;
-import android.util.Log;
 
-import java.io.FileInputStream;
 import java.io.IOException;
-import java.io.ObjectInputStream;
 import java.security.InvalidKeyException;
 import java.security.Key;
 import java.security.NoSuchAlgorithmException;
+import java.security.SecureRandom;
 
 import javax.crypto.BadPaddingException;
 import javax.crypto.Cipher;
 import javax.crypto.IllegalBlockSizeException;
+import javax.crypto.KeyGenerator;
 import javax.crypto.NoSuchPaddingException;
 
 public class SecurityClass {
@@ -25,10 +24,16 @@ public class SecurityClass {
         byte[] plainText = text;
 
         //
-        // Recuperando a key de um arquivo
-        ObjectInputStream in = new ObjectInputStream(new FileInputStream(path + "KeyFile.key"));
-        Key key = (Key)in.readObject();
-        in.close();
+        //Gera uma semente
+        String SecretSentence = "secreta";
+        SecureRandom sr = SecureRandom.getInstance("SHA1PRNG");
+        sr.setSeed(SecretSentence.getBytes("UTF8"));
+
+        //
+        // gera uma chave para o DES
+        KeyGenerator keyGen = KeyGenerator.getInstance("DES");
+        keyGen.init(56, sr);
+        Key key = keyGen.generateKey();
 
         //
         // define um objeto de cifra DES e imprime o provider utilizado
