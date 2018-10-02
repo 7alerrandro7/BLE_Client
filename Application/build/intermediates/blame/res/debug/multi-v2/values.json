@@ -1,27 +1,8 @@
 {
     "logs": [
         {
-            "outputFile": "C:\\Users\\Alessandro Faletti\\Downloads\\BluetoothLeGatt\\Application\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values\\values.xml",
+            "outputFile": "C:\\Users\\Alessandro Faletti\\Documents\\Projeto Final\\Projeto\\BLE_Client\\Application\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values\\values.xml",
             "map": [
-                {
-                    "source": "C:\\Users\\Alessandro Faletti\\Downloads\\BluetoothLeGatt\\Application\\src\\main\\res\\values\\base-strings.xml",
-                    "from": {
-                        "startLines": "18,19",
-                        "startColumns": "4,4",
-                        "startOffsets": "647,700",
-                        "endLines": "18,28",
-                        "endColumns": "52,13",
-                        "endOffsets": "695,971"
-                    },
-                    "to": {
-                        "startLines": "444,449",
-                        "startColumns": "4,4",
-                        "startOffsets": "40463,40768",
-                        "endLines": "444,458",
-                        "endColumns": "52,13",
-                        "endOffsets": "40511,41039"
-                    }
-                },
                 {
                     "source": "C:\\Users\\Alessandro Faletti\\.gradle\\caches\\transforms-1\\files-1.1\\support-media-compat-27.0.2.aar\\1b436ad43d2a255132d48faa3d811798\\res\\values\\values.xml",
                     "from": {
@@ -37,6 +18,23 @@
                         "startOffsets": "3692,125387,125563,125685,125947,126142",
                         "endColumns": "88,65,121,60,65,66",
                         "endOffsets": "3776,125448,125680,125741,126008,126204"
+                    }
+                },
+                {
+                    "source": "C:\\Users\\Alessandro Faletti\\Documents\\Projeto Final\\Projeto\\BLE_Client\\Application\\src\\main\\res\\values\\template-dimens.xml",
+                    "from": {
+                        "startLines": "28,24,23,22,21,20,29",
+                        "startColumns": "4,4,4,4,4,4,4",
+                        "startOffsets": "959,880,836,791,748,706,1029",
+                        "endColumns": "69,42,43,44,42,41,67",
+                        "endOffsets": "1024,918,875,831,786,743,1092"
+                    },
+                    "to": {
+                        "startLines": "363,364,365,366,367,368,392",
+                        "startColumns": "4,4,4,4,4,4,4",
+                        "startOffsets": "35460,35530,35573,35617,35662,35705,37178",
+                        "endColumns": "69,42,43,44,42,41,67",
+                        "endOffsets": "35525,35568,35612,35657,35700,35742,37241"
                     }
                 },
                 {
@@ -59,20 +57,22 @@
                     }
                 },
                 {
-                    "source": "C:\\Users\\Alessandro Faletti\\Downloads\\BluetoothLeGatt\\Application\\src\\main\\res\\values\\template-dimens.xml",
+                    "source": "C:\\Users\\Alessandro Faletti\\Documents\\Projeto Final\\Projeto\\BLE_Client\\Application\\src\\main\\res\\values\\template-styles.xml",
                     "from": {
-                        "startLines": "28,24,23,22,21,20,29",
-                        "startColumns": "4,4,4,4,4,4,4",
-                        "startOffsets": "959,880,836,791,748,706,1029",
-                        "endColumns": "69,42,43,44,42,41,67",
-                        "endOffsets": "1024,918,875,831,786,743,1092"
+                        "startLines": "24,20,22,27,29,34",
+                        "startColumns": "4,4,4,4,4,4",
+                        "startOffsets": "768,651,713,849,878,1075",
+                        "endLines": "24,20,22,27,32,39",
+                        "endColumns": "51,60,53,27,12,12",
+                        "endOffsets": "815,707,762,872,1069,1348"
                     },
                     "to": {
-                        "startLines": "363,364,365,366,367,368,392",
-                        "startColumns": "4,4,4,4,4,4,4",
-                        "startOffsets": "35460,35530,35573,35617,35662,35705,37178",
-                        "endColumns": "69,42,43,44,42,41,67",
-                        "endOffsets": "35525,35568,35612,35657,35700,35742,37241"
+                        "startLines": "478,1785,1786,1794,1891,1895",
+                        "startColumns": "4,4,4,4,4,4",
+                        "startOffsets": "42251,128793,128853,129578,137314,137510",
+                        "endLines": "478,1785,1786,1794,1894,1900",
+                        "endColumns": "50,59,52,26,12,12",
+                        "endOffsets": "42297,128848,128901,129600,137505,137783"
                     }
                 },
                 {
@@ -95,42 +95,6 @@
                     }
                 },
                 {
-                    "source": "C:\\Users\\Alessandro Faletti\\Downloads\\BluetoothLeGatt\\Application\\src\\main\\res\\values\\template-styles.xml",
-                    "from": {
-                        "startLines": "24,20,22,27,29,34",
-                        "startColumns": "4,4,4,4,4,4",
-                        "startOffsets": "768,651,713,849,878,1075",
-                        "endLines": "24,20,22,27,32,39",
-                        "endColumns": "51,60,53,27,12,12",
-                        "endOffsets": "815,707,762,872,1069,1348"
-                    },
-                    "to": {
-                        "startLines": "478,1785,1786,1794,1891,1895",
-                        "startColumns": "4,4,4,4,4,4",
-                        "startOffsets": "42251,128793,128853,129578,137314,137510",
-                        "endLines": "478,1785,1786,1794,1894,1900",
-                        "endColumns": "50,59,52,26,12,12",
-                        "endOffsets": "42297,128848,128901,129600,137505,137783"
-                    }
-                },
-                {
-                    "source": "C:\\Users\\Alessandro Faletti\\Downloads\\BluetoothLeGatt\\Application\\src\\main\\res\\values\\strings.xml",
-                    "from": {
-                        "startLines": "16,21,22,24,17,18,19,31,32,33,34,20,23,27,26,28",
-                        "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",
-                        "startOffsets": "686,954,1002,1114,753,798,863,1415,1464,1519,1562,910,1056,1256,1198,1330",
-                        "endColumns": "66,47,53,82,44,64,46,48,54,42,42,43,57,73,57,59",
-                        "endOffsets": "748,997,1051,1192,793,858,905,1459,1514,1557,1600,949,1109,1325,1251,1385"
-                    },
-                    "to": {
-                        "startLines": "445,446,447,448,459,460,461,462,463,464,465,466,469,470,471,472",
-                        "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",
-                        "startOffsets": "40516,40583,40631,40685,41044,41089,41154,41201,41250,41305,41348,41391,41559,41617,41691,41749",
-                        "endColumns": "66,47,53,82,44,64,46,48,54,42,42,43,57,73,57,59",
-                        "endOffsets": "40578,40626,40680,40763,41084,41149,41196,41245,41300,41343,41386,41430,41612,41686,41744,41804"
-                    }
-                },
-                {
                     "source": "C:\\Users\\Alessandro Faletti\\.gradle\\caches\\transforms-1\\files-1.1\\support-compat-27.0.2.aar\\ad53e6569c1d923ea56ca990bf61cbf3\\res\\values\\values.xml",
                     "from": {
                         "startLines": "2,3,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,54,55,59,60,61",
@@ -147,6 +111,42 @@
                         "endLines": "54,55,349,350,351,352,353,369,370,371,372,373,374,375,376,377,378,379,380,381,382,383,393,394,400,401,405,406,407,408,414,468,1734,1738,1740,1746,1748,1889,1890",
                         "endColumns": "68,62,69,67,71,69,60,60,60,61,63,61,60,67,99,59,65,72,68,56,51,61,71,75,34,34,49,33,34,34,69,70,116,12,109,12,128,71,66",
                         "endOffsets": "3624,3687,34400,34468,34540,34610,34671,35803,35864,35926,35990,36052,36113,36181,36281,36341,36407,36480,36549,36606,36658,36720,37313,37389,37663,37698,37890,37924,37959,37994,38339,41554,125181,125382,125558,125942,126137,137242,137309"
+                    }
+                },
+                {
+                    "source": "C:\\Users\\Alessandro Faletti\\Documents\\Projeto Final\\Projeto\\BLE_Client\\Application\\src\\main\\res\\values\\strings.xml",
+                    "from": {
+                        "startLines": "16,21,22,24,17,18,19,31,32,33,34,20,23,27,26,28",
+                        "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",
+                        "startOffsets": "686,954,1002,1114,753,798,863,1415,1464,1519,1562,910,1056,1256,1198,1330",
+                        "endColumns": "66,47,53,82,44,64,46,48,54,42,42,43,57,73,57,59",
+                        "endOffsets": "748,997,1051,1192,793,858,905,1459,1514,1557,1600,949,1109,1325,1251,1385"
+                    },
+                    "to": {
+                        "startLines": "445,446,447,448,459,460,461,462,463,464,465,466,469,470,471,472",
+                        "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",
+                        "startOffsets": "40516,40583,40631,40685,41044,41089,41154,41201,41250,41305,41348,41391,41559,41617,41691,41749",
+                        "endColumns": "66,47,53,82,44,64,46,48,54,42,42,43,57,73,57,59",
+                        "endOffsets": "40578,40626,40680,40763,41084,41149,41196,41245,41300,41343,41386,41430,41612,41686,41744,41804"
+                    }
+                },
+                {
+                    "source": "C:\\Users\\Alessandro Faletti\\Documents\\Projeto Final\\Projeto\\BLE_Client\\Application\\src\\main\\res\\values\\base-strings.xml",
+                    "from": {
+                        "startLines": "18,19",
+                        "startColumns": "4,4",
+                        "startOffsets": "647,700",
+                        "endLines": "18,28",
+                        "endColumns": "52,13",
+                        "endOffsets": "695,971"
+                    },
+                    "to": {
+                        "startLines": "444,449",
+                        "startColumns": "4,4",
+                        "startOffsets": "40463,40768",
+                        "endLines": "444,458",
+                        "endColumns": "52,13",
+                        "endOffsets": "40511,41039"
                     }
                 }
             ]

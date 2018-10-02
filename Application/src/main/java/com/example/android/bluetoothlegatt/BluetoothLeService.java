@@ -58,7 +58,10 @@ public class BluetoothLeService extends Service {
     public final static String ACTION_DATA_AVAILABLE = "com.example.bluetooth.le.ACTION_DATA_AVAILABLE";
     public final static String EXTRA_DATA = "com.example.bluetooth.le.EXTRA_DATA";
 
-    public final static UUID UUID_HEART_RATE_MEASUREMENT = UUID.fromString(SampleGattAttributes.HEART_RATE_MEASUREMENT);
+    public static String HEART_RATE_MEASUREMENT = "00002a37-0000-1000-8000-00805f9b34fb";
+    public static String CLIENT_CHARACTERISTIC_CONFIG = "00002902-0000-1000-8000-00805f9b34fb";
+
+    public final static UUID UUID_HEART_RATE_MEASUREMENT = UUID.fromString(HEART_RATE_MEASUREMENT);
 
     // Implements callback methods for GATT events that the app cares about.  For example,
     // connection change and services discovered.
@@ -261,7 +264,7 @@ public class BluetoothLeService extends Service {
 
         // This is specific to Heart Rate Measurement.
         if (UUID_HEART_RATE_MEASUREMENT.equals(characteristic.getUuid())) {
-            BluetoothGattDescriptor descriptor = characteristic.getDescriptor(UUID.fromString(SampleGattAttributes.CLIENT_CHARACTERISTIC_CONFIG));
+            BluetoothGattDescriptor descriptor = characteristic.getDescriptor(UUID.fromString(CLIENT_CHARACTERISTIC_CONFIG));
             descriptor.setValue(BluetoothGattDescriptor.ENABLE_NOTIFICATION_VALUE);
             mBluetoothGatt.writeDescriptor(descriptor);
         }
@@ -274,8 +277,8 @@ public class BluetoothLeService extends Service {
      * @return A {@code List} of supported services.
      */
     public List<BluetoothGattService> getSupportedGattServices() {
-        if (mBluetoothGatt == null) return null;
-
+        if (mBluetoothGatt == null)
+            return null;
         return mBluetoothGatt.getServices();
     }
 
@@ -292,26 +295,29 @@ public class BluetoothLeService extends Service {
         }
         /*get the read characteristic from the service*/
         BluetoothGattCharacteristic mReadCharacteristic = mCustomService.getCharacteristic(UUID.fromString("00002a2b-0000-1000-8000-00805f9b34fb"));
-        if(mBluetoothGatt.readCharacteristic(mReadCharacteristic) == false){
+        if(!mBluetoothGatt.readCharacteristic(mReadCharacteristic)){
             Log.w(TAG, "Failed to read characteristic");
         }
     }
 
-    public void writeCustomCharacteristic(int value) {
+    public void writeCustomCharacteristic(byte[] value) {
         if (mBluetoothAdapter == null || mBluetoothGatt == null) {
             Log.w(TAG, "BluetoothAdapter not initialized");
             return;
         }
         /*check if the service is available on the device*/
-        BluetoothGattService mCustomService = mBluetoothGatt.getService(UUID.fromString("00001110-0000-1000-8000-00805f9b34fb"));
+        BluetoothGattService mCustomService = mBluetoothGatt.getService(UUID.fromString("00001805-0000-1000-8000-00805f9b34fb"));
         if(mCustomService == null){
             Log.w(TAG, "Custom BLE Service not found");
             return;
         }
-        /*get the read characteristic from the service*/
+        /*get the write characteristic from the service*/
         BluetoothGattCharacteristic mWriteCharacteristic = mCustomService.getCharacteristic(UUID.fromString("00000001-0000-1000-8000-00805f9b34fb"));
-        mWriteCharacteristic.setValue(value,android.bluetooth.BluetoothGattCharacteristic.FORMAT_UINT8,0);
-        if(mBluetoothGatt.writeCharacteristic(mWriteCharacteristic) == false){
+        Log.w(TAG, "VALOOOOOOORRRRRR====" + value);
+        if (value != null) {
+            mWriteCharacteristic.setValue(value);
+        }
+        if(mBluetoothGatt.writeCharacteristic(mWriteCharacteristic)){
             Log.w(TAG, "Failed to write characteristic");
         }
     }

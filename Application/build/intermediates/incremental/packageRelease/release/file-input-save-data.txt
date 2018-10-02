@@ -1,7 +1,0 @@
-#Internal package file, do not edit.
-#Thu Apr 12 12:49:18 BRT 2018
-0.baseType=DIRECTORY
-0.base=C\:\\Users\\Alessandro Faletti\\Downloads\\BluetoothLeGatt\\Application\\build\\intermediates\\transforms\\dex\\release\\0
-0.path=classes.dex
-0.set=DEX
-count=1

@@ -27,16 +27,16 @@ import android.content.IntentFilter;
 import android.content.ServiceConnection;
 import android.os.Bundle;
 import android.os.IBinder;
-import android.support.annotation.NonNull;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.ExpandableListView;
 import android.widget.SimpleExpandableListAdapter;
 import android.widget.TextView;
 
-import java.io.IOException;
+
 import java.io.UnsupportedEncodingException;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
@@ -44,8 +44,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-import javax.crypto.BadPaddingException;
-import javax.crypto.IllegalBlockSizeException;
 import javax.crypto.NoSuchPaddingException;
 
 /**
@@ -73,18 +71,6 @@ public class DeviceControlActivity extends Activity {
 
     private final String LIST_NAME = "NAME";
     private final String LIST_UUID = "UUID";
-
-    @NonNull
-    private static String hexToAscii(String hexStr) {
-        StringBuilder output = new StringBuilder("");
-        Log.d(TAG, "Valor= " + hexStr);
-        for (int i = 0; i < hexStr.length(); i += 2) {
-            String str = hexStr.substring(i, i + 2);
-            output.append((char) Integer.parseInt(str, 16));
-        }
-
-        return output.toString();
-    }
 
     // Code to manage Service lifecycle.
     private final ServiceConnection mServiceConnection = new ServiceConnection() {
@@ -269,23 +255,16 @@ public class DeviceControlActivity extends Activity {
             mDataField.setText(new String(data, "UTF8"));
 
             try {
-                text = SecurityClass.Decrypt(data);
-            } catch (IOException e) {
-                e.printStackTrace();
+                text = ClientSecurityClass.Decrypt(data);
             } catch (NoSuchPaddingException e) {
                 e.printStackTrace();
             } catch (NoSuchAlgorithmException e) {
-                e.printStackTrace();
-            } catch (BadPaddingException e) {
-                e.printStackTrace();
-            } catch (IllegalBlockSizeException e) {
-                e.printStackTrace();
-            } catch (ClassNotFoundException e) {
                 e.printStackTrace();
             } catch (InvalidKeyException e) {
                 e.printStackTrace();
             }
 
+            Log.d(TAG, "TEXTO CRIPTO= " + text);
             mDataField_Security.setText(text);
         }
     }
@@ -353,7 +332,27 @@ public class DeviceControlActivity extends Activity {
 
     public void onClickWrite(View v){
         if(mBluetoothLeService != null) {
-            mBluetoothLeService.writeCustomCharacteristic(0xAA);
+            EditText text_field;
+            text_field = (EditText)findViewById(R.id.write_plain_text);
+            String text = text_field.getText().toString();
+            Log.d(TAG, "TEXTO LIMPOOO= " + text);
+            byte [] text_in_bytes = new byte[0];
+
+            try {
+                text_in_bytes = ClientSecurityClass.Encrypt(text);
+            } catch (UnsupportedEncodingException e) {
+                e.printStackTrace();
+            } catch (InvalidKeyException e) {
+                e.printStackTrace();
+            } catch (NoSuchPaddingException e) {
+                e.printStackTrace();
+            } catch (NoSuchAlgorithmException e) {
+                e.printStackTrace();
+            }
+
+            Log.d(TAG, "TEXTO CRIPTO= " + text_in_bytes);
+
+            mBluetoothLeService.writeCustomCharacteristic(text_in_bytes);
         }
     }
 
