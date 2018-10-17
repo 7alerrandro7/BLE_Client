@@ -18,7 +18,6 @@ package com.example.android.bluetoothlegatt;
 
 import android.app.Activity;
 import android.bluetooth.BluetoothGattCharacteristic;
-import android.bluetooth.BluetoothGattService;
 import android.content.BroadcastReceiver;
 import android.content.ComponentName;
 import android.content.Context;
@@ -33,7 +32,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ExpandableListView;
-import android.widget.SimpleExpandableListAdapter;
 import android.widget.TextView;
 
 
@@ -41,8 +39,6 @@ import java.io.UnsupportedEncodingException;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
 
 import javax.crypto.NoSuchPaddingException;
 
@@ -95,7 +91,6 @@ public class DeviceControlActivity extends Activity {
     // Handles various events fired by the Service.
     // ACTION_GATT_CONNECTED: connected to a GATT server.
     // ACTION_GATT_DISCONNECTED: disconnected from a GATT server.
-    // ACTION_GATT_SERVICES_DISCOVERED: discovered GATT services.
     // ACTION_DATA_AVAILABLE: received data from the device.  This can be a result of read
     //                        or notification operations.
     private final BroadcastReceiver mGattUpdateReceiver = new BroadcastReceiver() {
@@ -111,14 +106,8 @@ public class DeviceControlActivity extends Activity {
                 updateConnectionState(R.string.disconnected);
                 invalidateOptionsMenu();
                 clearUI();
-            } else if (BluetoothLeService.ACTION_GATT_SERVICES_DISCOVERED.equals(action)) {
-                // Show all the supported services and characteristics on the user interface.
-//                displayGattServices(mBluetoothLeService.getSupportedGattServices());
             } else if (BluetoothLeService.ACTION_DATA_AVAILABLE.equals(action)) {
-                //String text = intent.getStringExtra(BluetoothLeService.EXTRA_DATA);
                 byte[] msg = intent.getByteArrayExtra(BluetoothLeService.EXTRA_DATA);
-                //Log.i(TAG, "\n" + text);
-
                 try {
                     displayData(msg);
                 } catch (UnsupportedEncodingException e) {
@@ -128,38 +117,7 @@ public class DeviceControlActivity extends Activity {
         }
     };
 
-    // If a given GATT characteristic is selected, check for supported features.  This sample
-    // demonstrates 'Read' and 'Notify' features.  See
-    // http://d.android.com/reference/android/bluetooth/BluetoothGatt.html for the complete
-    // list of supported characteristic features.
-    private final ExpandableListView.OnChildClickListener servicesListClickListner =
-            new ExpandableListView.OnChildClickListener() {
-                @Override
-                public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id) {
-                    if (mGattCharacteristics != null) {
-                        final BluetoothGattCharacteristic characteristic = mGattCharacteristics.get(groupPosition).get(childPosition);
-                        final int charaProp = characteristic.getProperties();
-                        if ((charaProp | BluetoothGattCharacteristic.PROPERTY_READ) > 0) {
-                            // If there is an active notification on a characteristic, clear
-                            // it first so it doesn't update the data field on the user interface.
-                            if (mNotifyCharacteristic != null) {
-                                mBluetoothLeService.setCharacteristicNotification(mNotifyCharacteristic, false);
-                                mNotifyCharacteristic = null;
-                            }
-                            mBluetoothLeService.readCharacteristic(characteristic);
-                        }
-                        if ((charaProp | BluetoothGattCharacteristic.PROPERTY_NOTIFY) > 0) {
-                            mNotifyCharacteristic = characteristic;
-                            mBluetoothLeService.setCharacteristicNotification(characteristic, true);
-                        }
-                        return true;
-                    }
-                    return false;
-                }
-    };
-
     private void clearUI() {
-//        mGattServicesList.setAdapter((SimpleExpandableListAdapter) null);
         mDataField.setText(R.string.no_data);
     }
 
@@ -172,15 +130,8 @@ public class DeviceControlActivity extends Activity {
         mDeviceName = intent.getStringExtra(EXTRAS_DEVICE_NAME);
         mDeviceAddress = intent.getStringExtra(EXTRAS_DEVICE_ADDRESS);
 
-        // Sets up UI references.
-        /*
-        ((TextView) findViewById(R.id.device_address)).setText(mDeviceAddress);
-        mGattServicesList = (ExpandableListView) findViewById(R.id.gatt_services_list);
-        mGattServicesList.setOnChildClickListener(servicesListClickListner);
-        mConnectionState = (TextView) findViewById(R.id.connection_state);
-    */
-        mDataField = (TextView) findViewById(R.id.data_value);
-        mDataField_Security = (TextView) findViewById(R.id.security_value);
+        mDataField = findViewById(R.id.data_value);
+        mDataField_Security = findViewById(R.id.security_value);
 
         getActionBar().setTitle(mDeviceName);
         getActionBar().setDisplayHomeAsUpEnabled(true);
@@ -243,82 +194,8 @@ public class DeviceControlActivity extends Activity {
     private void updateConnectionState(final int resourceId) {
         runOnUiThread(new Runnable() {
             @Override
-            public void run() {
-//                mConnectionState.setText(resourceId);
-            }
+            public void run() {}
         });
-    }
-
-    private void displayData(byte[] data) throws UnsupportedEncodingException {
-        String text = "";
-        if (data != null) {
-            mDataField.setText(new String(data, "UTF8"));
-
-            try {
-                text = ClientSecurityClass.Decrypt(data);
-            } catch (NoSuchPaddingException e) {
-                e.printStackTrace();
-            } catch (NoSuchAlgorithmException e) {
-                e.printStackTrace();
-            } catch (InvalidKeyException e) {
-                e.printStackTrace();
-            }
-
-            Log.d(TAG, "TEXTO CRIPTO= " + text);
-            mDataField_Security.setText(text);
-        }
-    }
-
-    // Demonstrates how to iterate through the supported GATT Services/Characteristics.
-    // In this sample, we populate the data structure that is bound to the ExpandableListView
-    // on the UI.
-    private void displayGattServices(List<BluetoothGattService> gattServices) {
-        if (gattServices == null) return;
-        String uuid = null;
-        String unknownServiceString = getResources().getString(R.string.unknown_service);
-        String unknownCharaString = getResources().getString(R.string.unknown_characteristic);
-        ArrayList<HashMap<String, String>> gattServiceData = new ArrayList<HashMap<String, String>>();
-        ArrayList<ArrayList<HashMap<String, String>>> gattCharacteristicData = new ArrayList<ArrayList<HashMap<String, String>>>();
-        mGattCharacteristics = new ArrayList<ArrayList<BluetoothGattCharacteristic>>();
-
-        // Loops through available GATT Services.
-        for (BluetoothGattService gattService : gattServices) {
-            HashMap<String, String> currentServiceData = new HashMap<String, String>();
-            uuid = gattService.getUuid().toString();
-            currentServiceData.put(
-                    LIST_NAME, SampleGattAttributes.lookup(uuid, unknownServiceString));
-            currentServiceData.put(LIST_UUID, uuid);
-            gattServiceData.add(currentServiceData);
-
-            ArrayList<HashMap<String, String>> gattCharacteristicGroupData = new ArrayList<HashMap<String, String>>();
-            List<BluetoothGattCharacteristic> gattCharacteristics = gattService.getCharacteristics();
-            ArrayList<BluetoothGattCharacteristic> charas = new ArrayList<BluetoothGattCharacteristic>();
-
-            // Loops through available Characteristics.
-            for (BluetoothGattCharacteristic gattCharacteristic : gattCharacteristics) {
-                charas.add(gattCharacteristic);
-                HashMap<String, String> currentCharaData = new HashMap<String, String>();
-                uuid = gattCharacteristic.getUuid().toString();
-                currentCharaData.put(LIST_NAME, SampleGattAttributes.lookup(uuid, unknownCharaString));
-                currentCharaData.put(LIST_UUID, uuid);
-                gattCharacteristicGroupData.add(currentCharaData);
-            }
-            mGattCharacteristics.add(charas);
-            gattCharacteristicData.add(gattCharacteristicGroupData);
-        }
-
-        SimpleExpandableListAdapter gattServiceAdapter = new SimpleExpandableListAdapter(
-                this,
-                gattServiceData,
-                android.R.layout.simple_expandable_list_item_2,
-                new String[] {LIST_NAME, LIST_UUID},
-                new int[] { android.R.id.text1, android.R.id.text2 },
-                gattCharacteristicData,
-                android.R.layout.simple_expandable_list_item_2,
-                new String[] {LIST_NAME, LIST_UUID},
-                new int[] { android.R.id.text1, android.R.id.text2 }
-        );
-        mGattServicesList.setAdapter(gattServiceAdapter);
     }
 
     private static IntentFilter makeGattUpdateIntentFilter() {
@@ -351,8 +228,31 @@ public class DeviceControlActivity extends Activity {
             }
 
             Log.d(TAG, "TEXTO CRIPTO= " + text_in_bytes);
+            if(text_in_bytes != null){
+                mBluetoothLeService.writeCustomCharacteristic(text_in_bytes);
+            }else{
+                Log.w(TAG, "Null value");
+            }
+        }
+    }
 
-            mBluetoothLeService.writeCustomCharacteristic(text_in_bytes);
+    private void displayData(byte[] data) throws UnsupportedEncodingException {
+        String text = "";
+        if (data != null) {
+            mDataField.setText(new String(data, "UTF8"));
+
+            try {
+                text = ClientSecurityClass.Decrypt(data);
+            } catch (NoSuchPaddingException e) {
+                e.printStackTrace();
+            } catch (NoSuchAlgorithmException e) {
+                e.printStackTrace();
+            } catch (InvalidKeyException e) {
+                e.printStackTrace();
+            }
+
+            Log.d(TAG, "TEXTO CRIPTO= " + text);
+            mDataField_Security.setText(text);
         }
     }
 
