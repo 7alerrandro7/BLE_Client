@@ -54,7 +54,7 @@ public class ClientSecurityClass {
             }
 
             // imprime o ciphertext em hexadecimal
-            Log.i(TAG, buf.toString());
+            Log.i(TAG, "Texto criptografado: " + buf.toString());
         }
 
         return(cipherText);

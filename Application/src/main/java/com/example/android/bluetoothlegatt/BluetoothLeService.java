@@ -33,6 +33,8 @@ import android.os.IBinder;
 import android.util.Log;
 
 import java.io.UnsupportedEncodingException;
+import java.net.HttpCookie;
+import java.util.Arrays;
 import java.util.List;
 import java.util.UUID;
 
@@ -66,9 +68,29 @@ public class BluetoothLeService extends Service {
     /* Mandatory Write Information Characteristic */
     public static UUID CHARACTERISTIC_WRITE_UUID = UUID.fromString("00000001-0000-1000-8000-00805f9b34fb");
 
-    private void SecureConnection(){
+    public Package_Auth pack;
+
+    private boolean SecureConnection(){
         Sddl sddl = new Sddl(mBluetoothDeviceAddress,  mBluetoothAdapter.getAddress());
-        sddl.get_authorization(mBluetoothDeviceAddress, mBluetoothAdapter.getAddress());
+        Package_Auth PACK = sddl.get_authorization(mBluetoothDeviceAddress, mBluetoothAdapter.getAddress());
+        pack = PACK;
+        if(PACK != null){
+
+            Log.d(TAG, "PACK OTP: " + PACK.OTP);
+            Log.d(TAG, "PACK Ksession: " + PACK.Ksession);
+            Log.d(TAG, "PACK Package: " + PACK.Package);
+            Log.d(TAG, "PACK Package_HMAC: " + PACK.Package_HMAC);
+
+            Log.d(TAG, "PACK Package: " + PACK.Package.length);
+            Log.d(TAG, "PACK Package_HMAC: " + PACK.Package_HMAC.length);
+
+            sddl.print_hex(PACK.Package);
+            sddl.print_hex(PACK.Package_HMAC);
+
+            return true;
+        }
+
+        return false;
     }
 
     // Implements callback methods for GATT events that the app cares about.  For example,
@@ -84,7 +106,7 @@ public class BluetoothLeService extends Service {
                 broadcastUpdate(intentAction);
 
                 //Function that check if the HUB can talk with IoT
-                //SecureConnection();
+                boolean check = SecureConnection();
 
                 Log.i(TAG, "Connected to GATT server.");
                 // Attempts to discover services after successful connection.
@@ -112,6 +134,11 @@ public class BluetoothLeService extends Service {
             if (status == BluetoothGatt.GATT_SUCCESS) {
                 broadcastUpdate(ACTION_DATA_AVAILABLE, characteristic);
             }
+        }
+
+        @Override
+        public void onCharacteristicWrite(BluetoothGatt gatt, BluetoothGattCharacteristic characteristic, int status) {
+            super.onCharacteristicWrite(gatt, characteristic, status);
         }
 
         @Override
@@ -305,7 +332,7 @@ public class BluetoothLeService extends Service {
         }
         /*get the write characteristic from the service*/
         BluetoothGattCharacteristic mWriteCharacteristic = mCustomService.getCharacteristic(CHARACTERISTIC_WRITE_UUID);
-        Log.w(TAG, "VALOOOOOOORRRRRR====" + value);
+        Log.w(TAG, "Value= " + value.toString());
         if (value != null) {
             mWriteCharacteristic.setValue(value);
         }
