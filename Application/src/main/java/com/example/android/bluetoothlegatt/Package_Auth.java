@@ -1,8 +1,9 @@
 package com.example.android.bluetoothlegatt;
 
 import javax.crypto.spec.SecretKeySpec;
+import java.io.Serializable;
 
-public class Package_Auth {
+public class Package_Auth implements Serializable {
 
     byte[] OTP;
     SecretKeySpec Ksession;
@@ -15,4 +16,5 @@ public class Package_Auth {
         Package = aPackage;
         Package_HMAC = package_HMAC;
     }
+
 }

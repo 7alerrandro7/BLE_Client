@@ -1,4 +1,4 @@
-#Sun Oct 21 17:55:15 BRST 2018
+#Mon Oct 29 16:04:40 BRST 2018
 base.0=C\:\\Users\\Alessandro Faletti\\Documents\\Projeto Final\\Projeto\\BLE_Client\\Application\\build\\intermediates\\transforms\\dexMerger\\debug\\10
 path.0=classes.dex
 renamed.0=classes.dex

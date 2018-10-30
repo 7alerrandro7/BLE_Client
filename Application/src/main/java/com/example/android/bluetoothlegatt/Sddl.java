@@ -2,11 +2,16 @@ package com.example.android.bluetoothlegatt;
 
 import android.util.Log;
 
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.ObjectOutput;
+import java.io.ObjectOutputStream;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.security.*;
 
 import javax.crypto.Cipher;
+import javax.crypto.Mac;
 import javax.crypto.NoSuchPaddingException;
 import javax.crypto.spec.SecretKeySpec;
 
@@ -17,12 +22,12 @@ public class Sddl {
     private ArrayList<Hub> hubList = new ArrayList<>();
     private ArrayList<Obj> objList = new ArrayList<>();
 
-    private static byte[] Kauth_sddl;
+    private static SecretKeySpec Kauth_sddl;
 
 
     static {
         try {
-            Kauth_sddl = "Kauth_sddl".getBytes("ASCII");
+            Kauth_sddl = new SecretKeySpec(("Kauth_sddl").getBytes("ASCII"), "hmacMD5");
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
         }
@@ -56,7 +61,7 @@ public class Sddl {
         if(checkAddress(obj_id, hub_id)){
             Obj obj = DB_Get_Kauth_Kcipher(obj_id);
             if(obj != null){
-                Package_Auth PACK = createPackage(obj_id, hub_id, obj.Kcipher_obj);
+                Package_Auth PACK = createPackage(obj_id, hub_id, obj.Kcipher_obj, obj.Kauth_obj);
                 return PACK;
             }else{
                 Log.d(TAG, "Failed to check keys of IoT (Object)");
@@ -87,20 +92,14 @@ public class Sddl {
         return null;
     }
 
-    private Package_Auth createPackage(String obj_id, String hub_id, byte[] Kcipher_obj){
-        String OTPChallenge = generateOTPChallenge(5);
-        SecretKeySpec Ksession = Ksession(5);
-        byte[] OTP = generateOTP(obj_id, hub_id, OTPChallenge);
+    private Package_Auth createPackage(String obj_id, String hub_id, byte[] Kcipher_obj, byte[] Kauth_obj){
+        String OTPChallenge = generateOTPChallenge(13);
+        SecretKeySpec Ksession = Ksession(11);
 
-        Log.d(TAG, "OTPChallenge " + OTPChallenge);
-        Log.d(TAG, "Ksession: " + Ksession);
-
+        byte[] OTP = generateOTP(obj_id, hub_id, OTPChallenge, Kauth_obj);
         byte[] PackageK = GenerateST_PackageK(OTPChallenge, Ksession, Kcipher_obj);
-        Log.d(TAG, "PackageK: " + PackageK);
-
         byte[] Package_K_HMAC = SignST_Package_K(PackageK, Kauth_sddl);
 
-        Log.d(TAG, "PackageK_HMAC: " + Package_K_HMAC);
         Package_Auth PACK = new Package_Auth(OTP, Ksession, PackageK, Package_K_HMAC);
 
         return(PACK);
@@ -122,8 +121,15 @@ public class Sddl {
         return generatedToken.toString();
     }
 
-    private byte[] generateOTP(String obj_id, String hub_id, String OTPChallenge){
-        String concat = obj_id.substring(6,7) + hub_id.substring(0, 1) + OTPChallenge;
+    private byte[] generateOTP(String obj_id, String hub_id, String OTPChallenge, byte[] Kauth_obj){
+        String KAUTH = null;
+        try {
+            KAUTH = new String(Kauth_obj, "ASCII");
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+        String concat = obj_id + hub_id + OTPChallenge + KAUTH;
+        Log.d(TAG, "STRING OTP: " + concat);
 
         byte[] OTP = new byte[0];
         try {
@@ -156,22 +162,26 @@ public class Sddl {
 
     }
 
-    private byte[] GenerateST_PackageK(String OTPChallenge, SecretKeySpec Ksession, byte[] Kcipher_obj){
-        String Package = OTPChallenge + Ksession;
+    private byte[] CreatePackageK(String OTPChallenge, SecretKeySpec Ksession){
+        byte[] otp = OTPChallenge.getBytes();
+        byte[] ksession = Ksession.getEncoded();
+        Log.d(TAG, "Ksession_BYTE: ");
+        print_hex(ksession);
 
-        byte[] PackageK = new byte[0];
-        try {
-            PackageK = Encrypt(Package, Kcipher_obj);
-        } catch (UnsupportedEncodingException e) {
-            e.printStackTrace();
-        }
+        byte[] resp = new byte[otp.length + ksession.length];
+        System.arraycopy(otp, 0, resp, 0, otp.length);
+        System.arraycopy(ksession, 0, resp, otp.length, ksession.length);
 
-        return PackageK;
+        return resp;
     }
 
-    private byte[] Encrypt(String Package, byte[] Kcipher_obj) throws UnsupportedEncodingException {
+    private byte[] GenerateST_PackageK(String OTPChallenge, SecretKeySpec Ksession, byte[] Kcipher_obj){
+        byte[] PackageK = CreatePackageK(OTPChallenge, Ksession);
+        byte[] PackK = Encrypt(PackageK, Kcipher_obj);
+        return PackK;
+    }
 
-        byte[] pack = Package.getBytes("ASCII");
+    private byte[] Encrypt(byte[] Package, byte[] Kcipher_obj) {
 
         Cipher rc4 = null;
         try {
@@ -186,21 +196,21 @@ public class Sddl {
             e.printStackTrace();
         }
 
-        byte [] cipherText = rc4.update(pack);
+        byte [] cipherText = rc4.update(Package);
 
         return(cipherText);
     }
 
-    private byte[] SignST_Package_K(byte[] PackageK, byte[] Kauth_sddl){
-        byte[] PackageK_HMAC = new byte[0];
+    private byte[] SignST_Package_K(byte[] PackageK, SecretKeySpec Kauth_sddl){
+        byte[] bytes = new byte[0];
         try {
-            MessageDigest messageDigest = MessageDigest.getInstance("MD5");
-            messageDigest.update(PackageK);
-            PackageK_HMAC = messageDigest.digest();
+            Mac mac = Mac.getInstance("hmacMD5");
+            mac.init(Kauth_sddl);
+            bytes = mac.doFinal(PackageK);
+        } catch (InvalidKeyException e) {
         } catch (NoSuchAlgorithmException e) {
-            e.printStackTrace();
         }
-        return PackageK_HMAC;
+        return bytes;
     }
 
     public void print_hex(byte[] cipherText) {
@@ -212,7 +222,17 @@ public class Sddl {
             }
 
             // imprime o ciphertext em hexadecimal
-            Log.i(TAG, "Texto criptografado: " + buf.toString());
+            Log.i(TAG, "Texto bytes: " + buf.toString());
         }
+    }
+
+    private byte[] convertToBytes(Object object) {
+        try (ByteArrayOutputStream bos = new ByteArrayOutputStream(); ObjectOutput out = new ObjectOutputStream(bos)) {
+            out.writeObject(object);
+            return bos.toByteArray();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 }
