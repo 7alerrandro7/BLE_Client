@@ -41,10 +41,7 @@ import java.io.ObjectOutputStream;
 import java.io.UnsupportedEncodingException;
 import java.nio.ByteBuffer;
 import java.security.InvalidKeyException;
-import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-import java.sql.Time;
-import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -68,6 +65,8 @@ public class BluetoothLeService extends Service {
     private int packetInteration;
     private byte[][] packets;
 
+    private String obj_id;
+
     private ArrayList<AvailableObj> ObjList = new ArrayList<>();
 
     private static final int STATE_DISCONNECTED = 0;
@@ -82,18 +81,21 @@ public class BluetoothLeService extends Service {
 
     /* Current Security Service UUID */
     public static UUID SECURITY_SERVICE = UUID.fromString("00001805-0000-1000-8000-00805f9b34fb");
+    /* Mandatory Get Hello Accepted Msg Read Information Characteristic */
+    public static UUID GET_HELLO_UUID = UUID.fromString("00002a2b-0000-1000-8000-00405f6b34cb");
     /* Mandatory Read Information Characteristic */
-    public static UUID CHARACTERISTIC_READ_UUID = UUID.fromString("00002a2b-0000-1000-8000-00805f9b34fb");
+    public static UUID GET_MAC_UUID = UUID.fromString("00002a2b-0000-1000-8000-00805f9b34fb");
     /* Mandatory Write Information Characteristic */
     public static UUID AUTH_WRITE_UUID = UUID.fromString("00000001-0000-1000-8000-00805f9b34fb");
 
     //Função que armazena a chave de sessão, o id do IoT e o OTP(One Time Password) no Database
-    private boolean StoreKey(String obj_id, SecretKeySpec Ksession, byte[] OTP){
-        ObjList.add(new AvailableObj(obj_id, Ksession, OTP));
-        if(!ObjList.isEmpty()){
-            return true;
-        }
-        return false;
+    private boolean StoreKey(String obj_id_fix, String obj_id_random, SecretKeySpec Ksession, byte[] OTP, byte[] timestamp){
+        int index = getIndex_IdFix(obj_id_fix);
+        ObjList.get(index).setObj_id_random(obj_id_random);
+        ObjList.get(index).setOTP(OTP);
+        ObjList.get(index).setKsession(Ksession);
+        ObjList.get(index).setTimestamp(timestamp);
+        return true;
     }
 
     //Função que gera a mensagem criptografada ao ser enviada para o S-OBJ
@@ -101,7 +103,7 @@ public class BluetoothLeService extends Service {
         byte[] resp = new byte[PackageK.length + Package_K_With_HMAC.length + ts.length];
         System.arraycopy(PackageK, 0, resp, 0, PackageK.length);
         System.arraycopy(Package_K_With_HMAC, 0, resp, PackageK.length, Package_K_With_HMAC.length);
-        System.arraycopy(ts, 0, resp, PackageK.length + Package_K_With_HMAC.length, ts.length);
+        System.arraycopy(ts, 0, resp, (PackageK.length + Package_K_With_HMAC.length), ts.length);
         return(resp);
     }
 
@@ -122,7 +124,12 @@ public class BluetoothLeService extends Service {
     //Função que gera o hash do Hub_Id + A HelloMessage
     private byte[] GenerateHMAC(String hub_id, byte[] HM, SecretKeySpec Kauth_hub){
         byte[] Hello_Message_HMAC = new byte[0];
-        String pack = hub_id + HM;
+        String pack = null;
+        try {
+            pack = hub_id + new String(HM, "ASCII");
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
 
         try {
             Mac mac = Mac.getInstance("hmacMD5");
@@ -138,6 +145,31 @@ public class BluetoothLeService extends Service {
         return Hello_Message_HMAC;
     }
 
+    //Função que gera o hash do Accepted Message
+    private byte[] GenerateHMAC(String hub_id, String obj_id, byte[] Timestamp, SecretKeySpec Kauth_hub){
+        byte[] Hello_Accepted_Message_HMAC = new byte[0];
+        String pack = null;
+        try {
+            pack = hub_id + obj_id + new String(Timestamp, "ASCII");
+            Log.d(TAG, "PACKKK: " + pack);
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+
+        try {
+            Mac mac = Mac.getInstance("hmacMD5");
+            mac.init(Kauth_hub);
+
+            Hello_Accepted_Message_HMAC = mac.doFinal(pack.getBytes("ASCII"));
+
+        } catch (UnsupportedEncodingException e) {
+        } catch (InvalidKeyException e) {
+        } catch (NoSuchAlgorithmException e) {
+        }
+
+        return Hello_Accepted_Message_HMAC;
+    }
+
     private byte[] signHelloMessage(String hub_id, byte[] OTP, byte [] HelloMessage){
         SecretKeySpec Kauth_hub = Generate_Hub_Auth_Key(OTP);
         byte[] Hello_Message_HMAC = GenerateHMAC(hub_id, HelloMessage, Kauth_hub);
@@ -146,25 +178,35 @@ public class BluetoothLeService extends Service {
 
 
     private void SecureConnection(){
-        Sddl sddl = new Sddl(mBluetoothDeviceAddress,  mBluetoothAdapter.getAddress());
-        Package_Auth PACK = sddl.get_authorization(mBluetoothDeviceAddress, mBluetoothAdapter.getAddress());
+        getMacAddress();
+        return;
+    }
+
+    private void checkAuth(String obj_id){
+        Sddl sddl = new Sddl(obj_id,  mBluetoothAdapter.getAddress());
+        Package_Auth PACK = sddl.get_authorization(obj_id, mBluetoothAdapter.getAddress());
 
         if(PACK != null){
-            Log.d(TAG, "PACK OTP: " + PACK.OTP);
+            Log.d(TAG, "PACK OTP length: " + PACK.OTP.length);
+            Log.d(TAG, "PACK OTP: ");
             sddl.print_hex(PACK.OTP);
-            Log.d(TAG, "PACK Ksession: " + PACK.Ksession);
 
-            Log.d(TAG, "PACK Package: " + PACK.Package.length);
-            Log.d(TAG, "PACK Package_HMAC: " + PACK.Package_HMAC.length);
+            Log.d(TAG, "PACK Ksession length: " + PACK.Ksession.getEncoded().length);
+            Log.d(TAG, "PACK Ksession: ");
+            sddl.print_hex(PACK.Ksession.getEncoded());
 
+            Log.d(TAG, "PACK Package length: " + PACK.Package.length);
             Log.d(TAG, "PACK Package: ");
             sddl.print_hex(PACK.Package);
+
+            Log.d(TAG, "PACK Package_HMAC length: " + PACK.Package_HMAC.length);
             Log.d(TAG, "PACK Package_HMAC: ");
             sddl.print_hex(PACK.Package_HMAC);
 
-            if(StoreKey(mBluetoothDeviceAddress, PACK.Ksession, PACK.OTP)){
-                int ts = (int)(System.currentTimeMillis());
-                byte[] timestamp = ByteBuffer.allocate(4).putInt(ts).array();
+            int ts = (int)(System.currentTimeMillis());
+            byte[] timestamp = ByteBuffer.allocate(4).putInt(ts).array();
+
+            if(StoreKey(obj_id, mBluetoothDeviceAddress, PACK.Ksession, PACK.OTP, timestamp)){
                 byte [] HelloMessage = GenerateHelloMessage(PACK.Package, PACK.Package_HMAC, timestamp);
 
                 Log.d(TAG, "HelloMessage: ");
@@ -185,8 +227,6 @@ public class BluetoothLeService extends Service {
                 }
             }
         }
-
-        return;
     }
 
     private byte[] convertToBytes(Object object) {
@@ -206,19 +246,9 @@ public class BluetoothLeService extends Service {
         }
     }
 
-    public void sendData(byte [] data, BluetoothGattCharacteristic writeC) {
+    public void sendData(byte [] data, BluetoothGattCharacteristic Characteristic) {
         int chunksize = 20; //20 byte chunk
         packetSize = (int) Math.ceil(data.length / (double) chunksize); //make this variable public so we can access it on the other function
-
-        //Log.d(TAG, "LENGTH: " + Integer.toString(data.length));
-        //this is use as header, so peripheral device know ho much packet will be received.
-        /*
-        writeC.setValue(Integer.toString(data.length).getBytes());
-        Log.d(TAG, "TAM: " + Integer.toString(data.length).getBytes());
-        Log.d(TAG, "TAM: " + Integer.toString(data.length).getBytes().length);
-        mBluetoothGatt.writeCharacteristic(writeC);
-        mBluetoothGatt.executeReliableWrite();
-        */
 
         packets = new byte[packetSize][chunksize];
         packetInteration = 0;
@@ -232,22 +262,75 @@ public class BluetoothLeService extends Service {
             start += chunksize;
         }
 
-        //if(writeC.getUuid().equals(AUTH_WRITE_UUID)) {
-            //for (int i = 0; i<packetSize; i++) {
-                //Log.d(TAG, "I: " + i + "  -- Packetsize: " + packetSize);
-                if (packetInteration < packetSize) {
-                    try {
-                        Thread.sleep(2000);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
-                    writeC.setValue(packets[packetInteration]);
-                    mBluetoothGatt.writeCharacteristic(writeC);
-                    mBluetoothGatt.executeReliableWrite();
-                    packetInteration++;
-                }
-            //}
-        //}
+        if (packetInteration < packetSize) {
+            try {
+                Thread.sleep(2000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            Log.d(TAG,"Enviando Pacote " + (packetInteration+1) + " de " + packetSize);
+            Characteristic.setValue(packets[packetInteration]);
+            mBluetoothGatt.writeCharacteristic(Characteristic);
+            mBluetoothGatt.executeReliableWrite();
+            packetInteration++;
+        }
+    }
+
+    private boolean RemoveObj(String ObjAddress){
+        for(int i=0; i<ObjList.size(); i++){
+            if(ObjList.get(i).getObj_id_random().equals(ObjAddress)){
+                ObjList.remove(ObjList.get(i));
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private int getIndex_IdFix(String ObjAddress){
+        for(int i=0; i<ObjList.size(); i++){
+            if(ObjList.get(i).getObj_id_fix().equals(ObjAddress)){
+                return i;
+            }
+        }
+        return 0;
+    }
+
+    private int getIndex_IdRandom(String ObjAddress){
+        for(int i=0; i<ObjList.size(); i++){
+            if(ObjList.get(i).getObj_id_random().equals(ObjAddress)){
+                return i;
+            }
+        }
+        return 0;
+    }
+
+
+    private boolean CheckSignForHelloAcceptedMessage(String hub_id, String obj_id, byte[] Timestamp, byte[] OTP, byte[] AcceptedHelloMsg_HASH){
+        SecretKeySpec Kauth_hub = Generate_Hub_Auth_Key(OTP);
+        byte[] AcceptedHelloMsg_HMAC = GenerateHMAC(hub_id, obj_id, Timestamp, Kauth_hub);
+        Log.d(TAG, "AcceptedMessage_HASH: ");
+        print_hex(AcceptedHelloMsg_HASH);
+
+        Log.d(TAG, "AcceptedMessage_HMAC: ");
+        print_hex(AcceptedHelloMsg_HMAC);
+
+        if(Arrays.equals(AcceptedHelloMsg_HMAC, AcceptedHelloMsg_HASH)){
+            return true;
+        }
+        return false;
+    }
+
+    public void print_hex(byte[] cipherText) {
+        if(cipherText != null){
+            StringBuffer buf = new StringBuffer();
+            for(int i = 0; i < cipherText.length; i++) {
+                String hex = Integer.toHexString(0x0100 + (cipherText[i] & 0x00FF)).substring(1);
+                buf.append((hex.length() < 2 ? "0" : "") + hex);
+            }
+
+            // imprime o ciphertext em hexadecimal
+            Log.i(TAG, "Texto bytes: " + buf.toString());
+        }
     }
 
     // Implements callback methods for GATT events that the app cares about.  For example,
@@ -256,7 +339,6 @@ public class BluetoothLeService extends Service {
         @Override
         public void onConnectionStateChange(BluetoothGatt gatt, int status, int newState) {
             String intentAction;
-            Log.d(TAG, "NEWSTATE: " + newState);
             if (newState == BluetoothProfile.STATE_CONNECTED) {
                 intentAction = ACTION_GATT_CONNECTED;
                 mConnectionState = STATE_CONNECTED;
@@ -268,6 +350,7 @@ public class BluetoothLeService extends Service {
             } else if (newState == BluetoothProfile.STATE_DISCONNECTED) {
                 intentAction = ACTION_GATT_DISCONNECTED;
                 mConnectionState = STATE_DISCONNECTED;
+                RemoveObj(gatt.getDevice().getAddress());
                 Log.i(TAG, "Disconnected from GATT server.");
                 broadcastUpdate(intentAction);
             }
@@ -286,19 +369,22 @@ public class BluetoothLeService extends Service {
         @Override
         public void onCharacteristicRead(BluetoothGatt gatt, BluetoothGattCharacteristic characteristic, int status) {
             if (status == BluetoothGatt.GATT_SUCCESS) {
-                broadcastUpdate(ACTION_DATA_AVAILABLE, characteristic);
+                broadcastUpdate(ACTION_DATA_AVAILABLE, characteristic, gatt.getDevice().getAddress());
             }
         }
 
         @Override
         public void onCharacteristicWrite(BluetoothGatt gatt, BluetoothGattCharacteristic characteristic, int status) {
-            //super.onCharacteristicWrite(gatt, characteristic, status);
-
             if(characteristic.getUuid().equals(AUTH_WRITE_UUID)){
                 if(packetInteration < packetSize){
+                    Log.d(TAG,"Enviando Pacote " + (packetInteration+1) + " de " + packetSize);
                     characteristic.setValue(packets[packetInteration]);
                     mBluetoothGatt.writeCharacteristic(characteristic);
                     packetInteration++;
+                }
+                if(packetInteration == 3){
+                    Log.d(TAG, "Get Hello Message!!!");
+                    getHelloAcceptedMessage();
                 }
             }else{
                 super.onCharacteristicWrite(gatt, characteristic, status);
@@ -322,6 +408,26 @@ public class BluetoothLeService extends Service {
         // Broadcast the information of a characteristic.
         intent.putExtra(EXTRA_DATA, characteristic.getValue());
         sendBroadcast(intent);
+    }
+
+    private void broadcastUpdate(final String action, final BluetoothGattCharacteristic characteristic, String ObjAddress) {
+        final Intent intent = new Intent(action);
+        // Broadcast the information of a characteristic.
+        intent.putExtra(EXTRA_DATA, characteristic.getValue());
+        sendBroadcast(intent);
+        if(characteristic.getUuid().equals(GET_MAC_UUID)){
+            String objId = characteristic.getStringValue(0);
+            ObjList.add(new AvailableObj(objId));
+            checkAuth(objId);
+        }else if(characteristic.getUuid().equals(GET_HELLO_UUID)){
+            byte[] AcceptedHelloMsg = characteristic.getValue();
+            int index = getIndex_IdRandom(ObjAddress);
+            if(CheckSignForHelloAcceptedMessage(mBluetoothAdapter.getAddress(), ObjList.get(index).getObj_id_fix(), ObjList.get(index).getTimestamp(), ObjList.get(index).getOTP(), AcceptedHelloMsg)){
+                Log.d(TAG, "Estou autenticado!!!");
+            }else{
+                Log.d(TAG, "Não estou autenticado T-T");
+            }
+        }
     }
 
     public class LocalBinder extends Binder {
@@ -465,20 +571,39 @@ public class BluetoothLeService extends Service {
         return mBluetoothGatt.getServices();
     }
 
-    public void readCustomCharacteristic() {
+    public void getHelloAcceptedMessage() {
         if (mBluetoothAdapter == null || mBluetoothGatt == null) {
             Log.w(TAG, "BluetoothAdapter not initialized");
             return;
         }
         /*check if the service is available on the device*/
-        BluetoothGattService mCustomService = mBluetoothGatt.getService(SECURITY_SERVICE);
-        if(mCustomService == null){
+        BluetoothGattService mSecurityService = mBluetoothGatt.getService(SECURITY_SERVICE);
+        if(mSecurityService == null){
             Log.w(TAG, "Custom BLE Service not found");
             return;
         }
 
         /*get the read characteristic from the service*/
-        BluetoothGattCharacteristic mReadCharacteristic = mCustomService.getCharacteristic(CHARACTERISTIC_READ_UUID);
+        BluetoothGattCharacteristic mReadCharacteristic = mSecurityService.getCharacteristic(GET_HELLO_UUID);
+        if(!mBluetoothGatt.readCharacteristic(mReadCharacteristic)){
+            Log.w(TAG, "Failed to read characteristic");
+        }
+    }
+
+    public void getMacAddress() {
+        if (mBluetoothAdapter == null || mBluetoothGatt == null) {
+            Log.w(TAG, "BluetoothAdapter not initialized");
+            return;
+        }
+        /*check if the service is available on the device*/
+        BluetoothGattService mSecurityService = mBluetoothGatt.getService(SECURITY_SERVICE);
+        if(mSecurityService == null){
+            Log.w(TAG, "Custom BLE Service not found");
+            return;
+        }
+
+        /*get the read characteristic from the service*/
+        BluetoothGattCharacteristic mReadCharacteristic = mSecurityService.getCharacteristic(GET_MAC_UUID);
         if(!mBluetoothGatt.readCharacteristic(mReadCharacteristic)){
             Log.w(TAG, "Failed to read characteristic");
         }
@@ -490,13 +615,13 @@ public class BluetoothLeService extends Service {
             return;
         }
         /*check if the service is available on the device*/
-        BluetoothGattService mCustomService = mBluetoothGatt.getService(SECURITY_SERVICE);
-        if(mCustomService == null){
+        BluetoothGattService mSecurityService = mBluetoothGatt.getService(SECURITY_SERVICE);
+        if(mSecurityService == null){
             Log.w(TAG, "Custom BLE Service not found");
             return;
         }
         /*get the write characteristic from the service*/
-        BluetoothGattCharacteristic mWriteCharacteristic = mCustomService.getCharacteristic(AUTH_WRITE_UUID);
+        BluetoothGattCharacteristic mWriteCharacteristic = mSecurityService.getCharacteristic(AUTH_WRITE_UUID);
         if (value != null) {
             sendData(value, mWriteCharacteristic);
             //mWriteCharacteristic.setValue(value);

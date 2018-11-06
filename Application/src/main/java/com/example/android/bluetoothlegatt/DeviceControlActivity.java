@@ -227,7 +227,6 @@ public class DeviceControlActivity extends Activity {
                 e.printStackTrace();
             }
 
-            Log.d(TAG, "TEXTO CRIPTO= " + text_in_bytes);
             if(text_in_bytes != null){
                 mBluetoothLeService.writeCustomCharacteristic(text_in_bytes);
             }else{
@@ -251,14 +250,13 @@ public class DeviceControlActivity extends Activity {
                 e.printStackTrace();
             }
 
-            Log.d(TAG, "TEXTO CRIPTO= " + text);
             mDataField_Security.setText(text);
         }
     }
 
     public void onClickRead(View v){
         if(mBluetoothLeService != null) {
-            mBluetoothLeService.readCustomCharacteristic();
+            mBluetoothLeService.getMacAddress();
         }
     }
 }

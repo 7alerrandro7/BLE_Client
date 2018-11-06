@@ -5,7 +5,6 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b8405f02-fa95-465d-920c-7c8b6cb90504" name="Default" comment="">
-      <change beforePath="" afterPath="$PROJECT_DIR$/Application/src/main/java/com/example/android/bluetoothlegatt/AvailableObj.java" />
       <change beforePath="$PROJECT_DIR$/.gradle/4.4/fileHashes/fileHashes.bin" afterPath="$PROJECT_DIR$/.gradle/4.4/fileHashes/fileHashes.bin" />
       <change beforePath="$PROJECT_DIR$/.gradle/4.4/fileHashes/fileHashes.lock" afterPath="$PROJECT_DIR$/.gradle/4.4/fileHashes/fileHashes.lock" />
       <change beforePath="$PROJECT_DIR$/.gradle/4.4/javaCompile/classAnalysis.bin" afterPath="$PROJECT_DIR$/.gradle/4.4/javaCompile/classAnalysis.bin" />
@@ -16,42 +15,44 @@
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change beforePath="$PROJECT_DIR$/Application/build/intermediates/build-info/debug/build-info.xml" afterPath="$PROJECT_DIR$/Application/build/intermediates/build-info/debug/build-info.xml" />
+      <change beforePath="$PROJECT_DIR$/Application/build/intermediates/classes/debug/com/example/android/bluetoothlegatt/AvailableObj.class" afterPath="$PROJECT_DIR$/Application/build/intermediates/classes/debug/com/example/android/bluetoothlegatt/AvailableObj.class" />
       <change beforePath="$PROJECT_DIR$/Application/build/intermediates/classes/debug/com/example/android/bluetoothlegatt/BluetoothLeService$1.class" afterPath="$PROJECT_DIR$/Application/build/intermediates/classes/debug/com/example/android/bluetoothlegatt/BluetoothLeService$1.class" />
       <change beforePath="$PROJECT_DIR$/Application/build/intermediates/classes/debug/com/example/android/bluetoothlegatt/BluetoothLeService$LocalBinder.class" afterPath="$PROJECT_DIR$/Application/build/intermediates/classes/debug/com/example/android/bluetoothlegatt/BluetoothLeService$LocalBinder.class" />
       <change beforePath="$PROJECT_DIR$/Application/build/intermediates/classes/debug/com/example/android/bluetoothlegatt/BluetoothLeService.class" afterPath="$PROJECT_DIR$/Application/build/intermediates/classes/debug/com/example/android/bluetoothlegatt/BluetoothLeService.class" />
-      <change beforePath="$PROJECT_DIR$/Application/build/intermediates/classes/debug/com/example/android/bluetoothlegatt/Package_Auth.class" afterPath="$PROJECT_DIR$/Application/build/intermediates/classes/debug/com/example/android/bluetoothlegatt/Package_Auth.class" />
-      <change beforePath="$PROJECT_DIR$/Application/build/intermediates/classes/debug/com/example/android/bluetoothlegatt/Sddl.class" afterPath="$PROJECT_DIR$/Application/build/intermediates/classes/debug/com/example/android/bluetoothlegatt/Sddl.class" />
+      <change beforePath="$PROJECT_DIR$/Application/build/intermediates/classes/debug/com/example/android/bluetoothlegatt/ClientSecurityClass.class" afterPath="$PROJECT_DIR$/Application/build/intermediates/classes/debug/com/example/android/bluetoothlegatt/ClientSecurityClass.class" />
+      <change beforePath="$PROJECT_DIR$/Application/build/intermediates/classes/debug/com/example/android/bluetoothlegatt/DeviceControlActivity.class" afterPath="$PROJECT_DIR$/Application/build/intermediates/classes/debug/com/example/android/bluetoothlegatt/DeviceControlActivity.class" />
+      <change beforePath="$PROJECT_DIR$/Application/build/intermediates/incremental-verifier/debug/com/example/android/bluetoothlegatt/AvailableObj.class" afterPath="$PROJECT_DIR$/Application/build/intermediates/incremental-verifier/debug/com/example/android/bluetoothlegatt/AvailableObj.class" />
       <change beforePath="$PROJECT_DIR$/Application/build/intermediates/incremental-verifier/debug/com/example/android/bluetoothlegatt/BluetoothLeService$1.class" afterPath="$PROJECT_DIR$/Application/build/intermediates/incremental-verifier/debug/com/example/android/bluetoothlegatt/BluetoothLeService$1.class" />
       <change beforePath="$PROJECT_DIR$/Application/build/intermediates/incremental-verifier/debug/com/example/android/bluetoothlegatt/BluetoothLeService$LocalBinder.class" afterPath="$PROJECT_DIR$/Application/build/intermediates/incremental-verifier/debug/com/example/android/bluetoothlegatt/BluetoothLeService$LocalBinder.class" />
       <change beforePath="$PROJECT_DIR$/Application/build/intermediates/incremental-verifier/debug/com/example/android/bluetoothlegatt/BluetoothLeService.class" afterPath="$PROJECT_DIR$/Application/build/intermediates/incremental-verifier/debug/com/example/android/bluetoothlegatt/BluetoothLeService.class" />
-      <change beforePath="$PROJECT_DIR$/Application/build/intermediates/incremental-verifier/debug/com/example/android/bluetoothlegatt/Package_Auth.class" afterPath="$PROJECT_DIR$/Application/build/intermediates/incremental-verifier/debug/com/example/android/bluetoothlegatt/Package_Auth.class" />
-      <change beforePath="$PROJECT_DIR$/Application/build/intermediates/incremental-verifier/debug/com/example/android/bluetoothlegatt/Sddl.class" afterPath="$PROJECT_DIR$/Application/build/intermediates/incremental-verifier/debug/com/example/android/bluetoothlegatt/Sddl.class" />
+      <change beforePath="$PROJECT_DIR$/Application/build/intermediates/incremental-verifier/debug/com/example/android/bluetoothlegatt/ClientSecurityClass.class" afterPath="$PROJECT_DIR$/Application/build/intermediates/incremental-verifier/debug/com/example/android/bluetoothlegatt/ClientSecurityClass.class" />
+      <change beforePath="$PROJECT_DIR$/Application/build/intermediates/incremental-verifier/debug/com/example/android/bluetoothlegatt/DeviceControlActivity.class" afterPath="$PROJECT_DIR$/Application/build/intermediates/incremental-verifier/debug/com/example/android/bluetoothlegatt/DeviceControlActivity.class" />
       <change beforePath="$PROJECT_DIR$/Application/build/intermediates/instant-run-support/debug/package_slice_9/dex-renamer-state.txt" afterPath="$PROJECT_DIR$/Application/build/intermediates/instant-run-support/debug/package_slice_9/dex-renamer-state.txt" />
       <change beforePath="$PROJECT_DIR$/Application/build/intermediates/split-apk/debug/slices/slice_9.apk" afterPath="$PROJECT_DIR$/Application/build/intermediates/split-apk/debug/slices/slice_9.apk" />
+      <change beforePath="$PROJECT_DIR$/Application/build/intermediates/transforms/dexBuilder/debug/35/com/example/android/bluetoothlegatt/AvailableObj.dex" afterPath="$PROJECT_DIR$/Application/build/intermediates/transforms/dexBuilder/debug/35/com/example/android/bluetoothlegatt/AvailableObj.dex" />
       <change beforePath="$PROJECT_DIR$/Application/build/intermediates/transforms/dexBuilder/debug/35/com/example/android/bluetoothlegatt/BluetoothLeService$1.dex" afterPath="$PROJECT_DIR$/Application/build/intermediates/transforms/dexBuilder/debug/35/com/example/android/bluetoothlegatt/BluetoothLeService$1.dex" />
       <change beforePath="$PROJECT_DIR$/Application/build/intermediates/transforms/dexBuilder/debug/35/com/example/android/bluetoothlegatt/BluetoothLeService$LocalBinder.dex" afterPath="$PROJECT_DIR$/Application/build/intermediates/transforms/dexBuilder/debug/35/com/example/android/bluetoothlegatt/BluetoothLeService$LocalBinder.dex" />
       <change beforePath="$PROJECT_DIR$/Application/build/intermediates/transforms/dexBuilder/debug/35/com/example/android/bluetoothlegatt/BluetoothLeService.dex" afterPath="$PROJECT_DIR$/Application/build/intermediates/transforms/dexBuilder/debug/35/com/example/android/bluetoothlegatt/BluetoothLeService.dex" />
-      <change beforePath="$PROJECT_DIR$/Application/build/intermediates/transforms/dexBuilder/debug/35/com/example/android/bluetoothlegatt/Package_Auth.dex" afterPath="$PROJECT_DIR$/Application/build/intermediates/transforms/dexBuilder/debug/35/com/example/android/bluetoothlegatt/Package_Auth.dex" />
-      <change beforePath="$PROJECT_DIR$/Application/build/intermediates/transforms/dexBuilder/debug/35/com/example/android/bluetoothlegatt/Sddl.dex" afterPath="$PROJECT_DIR$/Application/build/intermediates/transforms/dexBuilder/debug/35/com/example/android/bluetoothlegatt/Sddl.dex" />
-      <change beforePath="$PROJECT_DIR$/Application/build/intermediates/transforms/dexBuilder/debug/__content__.json" afterPath="$PROJECT_DIR$/Application/build/intermediates/transforms/dexBuilder/debug/__content__.json" />
+      <change beforePath="$PROJECT_DIR$/Application/build/intermediates/transforms/dexBuilder/debug/35/com/example/android/bluetoothlegatt/ClientSecurityClass.dex" afterPath="$PROJECT_DIR$/Application/build/intermediates/transforms/dexBuilder/debug/35/com/example/android/bluetoothlegatt/ClientSecurityClass.dex" />
+      <change beforePath="$PROJECT_DIR$/Application/build/intermediates/transforms/dexBuilder/debug/35/com/example/android/bluetoothlegatt/DeviceControlActivity.dex" afterPath="$PROJECT_DIR$/Application/build/intermediates/transforms/dexBuilder/debug/35/com/example/android/bluetoothlegatt/DeviceControlActivity.dex" />
       <change beforePath="$PROJECT_DIR$/Application/build/intermediates/transforms/dexMerger/debug/10/classes.dex" afterPath="$PROJECT_DIR$/Application/build/intermediates/transforms/dexMerger/debug/10/classes.dex" />
-      <change beforePath="$PROJECT_DIR$/Application/build/intermediates/transforms/dexMerger/debug/__content__.json" afterPath="$PROJECT_DIR$/Application/build/intermediates/transforms/dexMerger/debug/__content__.json" />
+      <change beforePath="$PROJECT_DIR$/Application/build/intermediates/transforms/instantRun/debug/0/com/example/android/bluetoothlegatt/AvailableObj.class" afterPath="$PROJECT_DIR$/Application/build/intermediates/transforms/instantRun/debug/0/com/example/android/bluetoothlegatt/AvailableObj.class" />
       <change beforePath="$PROJECT_DIR$/Application/build/intermediates/transforms/instantRun/debug/0/com/example/android/bluetoothlegatt/BluetoothLeService$1.class" afterPath="$PROJECT_DIR$/Application/build/intermediates/transforms/instantRun/debug/0/com/example/android/bluetoothlegatt/BluetoothLeService$1.class" />
       <change beforePath="$PROJECT_DIR$/Application/build/intermediates/transforms/instantRun/debug/0/com/example/android/bluetoothlegatt/BluetoothLeService$LocalBinder.class" afterPath="$PROJECT_DIR$/Application/build/intermediates/transforms/instantRun/debug/0/com/example/android/bluetoothlegatt/BluetoothLeService$LocalBinder.class" />
       <change beforePath="$PROJECT_DIR$/Application/build/intermediates/transforms/instantRun/debug/0/com/example/android/bluetoothlegatt/BluetoothLeService.class" afterPath="$PROJECT_DIR$/Application/build/intermediates/transforms/instantRun/debug/0/com/example/android/bluetoothlegatt/BluetoothLeService.class" />
-      <change beforePath="$PROJECT_DIR$/Application/build/intermediates/transforms/instantRun/debug/0/com/example/android/bluetoothlegatt/Package_Auth.class" afterPath="$PROJECT_DIR$/Application/build/intermediates/transforms/instantRun/debug/0/com/example/android/bluetoothlegatt/Package_Auth.class" />
-      <change beforePath="$PROJECT_DIR$/Application/build/intermediates/transforms/instantRun/debug/0/com/example/android/bluetoothlegatt/Sddl.class" afterPath="$PROJECT_DIR$/Application/build/intermediates/transforms/instantRun/debug/0/com/example/android/bluetoothlegatt/Sddl.class" />
-      <change beforePath="$PROJECT_DIR$/Application/build/intermediates/transforms/instantRun/debug/__content__.json" afterPath="$PROJECT_DIR$/Application/build/intermediates/transforms/instantRun/debug/__content__.json" />
+      <change beforePath="$PROJECT_DIR$/Application/build/intermediates/transforms/instantRun/debug/0/com/example/android/bluetoothlegatt/ClientSecurityClass.class" afterPath="$PROJECT_DIR$/Application/build/intermediates/transforms/instantRun/debug/0/com/example/android/bluetoothlegatt/ClientSecurityClass.class" />
+      <change beforePath="$PROJECT_DIR$/Application/build/intermediates/transforms/instantRun/debug/0/com/example/android/bluetoothlegatt/DeviceControlActivity.class" afterPath="$PROJECT_DIR$/Application/build/intermediates/transforms/instantRun/debug/0/com/example/android/bluetoothlegatt/DeviceControlActivity.class" />
       <change beforePath="$PROJECT_DIR$/Application/build/intermediates/transforms/instantRunSlicer/debug/9/buildId.txt" afterPath="$PROJECT_DIR$/Application/build/intermediates/transforms/instantRunSlicer/debug/9/buildId.txt" />
+      <change beforePath="$PROJECT_DIR$/Application/build/intermediates/transforms/instantRunSlicer/debug/9/com/example/android/bluetoothlegatt/AvailableObj.class" afterPath="$PROJECT_DIR$/Application/build/intermediates/transforms/instantRunSlicer/debug/9/com/example/android/bluetoothlegatt/AvailableObj.class" />
       <change beforePath="$PROJECT_DIR$/Application/build/intermediates/transforms/instantRunSlicer/debug/9/com/example/android/bluetoothlegatt/BluetoothLeService$1.class" afterPath="$PROJECT_DIR$/Application/build/intermediates/transforms/instantRunSlicer/debug/9/com/example/android/bluetoothlegatt/BluetoothLeService$1.class" />
       <change beforePath="$PROJECT_DIR$/Application/build/intermediates/transforms/instantRunSlicer/debug/9/com/example/android/bluetoothlegatt/BluetoothLeService$LocalBinder.class" afterPath="$PROJECT_DIR$/Application/build/intermediates/transforms/instantRunSlicer/debug/9/com/example/android/bluetoothlegatt/BluetoothLeService$LocalBinder.class" />
       <change beforePath="$PROJECT_DIR$/Application/build/intermediates/transforms/instantRunSlicer/debug/9/com/example/android/bluetoothlegatt/BluetoothLeService.class" afterPath="$PROJECT_DIR$/Application/build/intermediates/transforms/instantRunSlicer/debug/9/com/example/android/bluetoothlegatt/BluetoothLeService.class" />
-      <change beforePath="$PROJECT_DIR$/Application/build/intermediates/transforms/instantRunSlicer/debug/9/com/example/android/bluetoothlegatt/Package_Auth.class" afterPath="$PROJECT_DIR$/Application/build/intermediates/transforms/instantRunSlicer/debug/9/com/example/android/bluetoothlegatt/Package_Auth.class" />
-      <change beforePath="$PROJECT_DIR$/Application/build/intermediates/transforms/instantRunSlicer/debug/9/com/example/android/bluetoothlegatt/Sddl.class" afterPath="$PROJECT_DIR$/Application/build/intermediates/transforms/instantRunSlicer/debug/9/com/example/android/bluetoothlegatt/Sddl.class" />
-      <change beforePath="$PROJECT_DIR$/Application/build/intermediates/transforms/instantRunSlicer/debug/__content__.json" afterPath="$PROJECT_DIR$/Application/build/intermediates/transforms/instantRunSlicer/debug/__content__.json" />
+      <change beforePath="$PROJECT_DIR$/Application/build/intermediates/transforms/instantRunSlicer/debug/9/com/example/android/bluetoothlegatt/ClientSecurityClass.class" afterPath="$PROJECT_DIR$/Application/build/intermediates/transforms/instantRunSlicer/debug/9/com/example/android/bluetoothlegatt/ClientSecurityClass.class" />
+      <change beforePath="$PROJECT_DIR$/Application/build/intermediates/transforms/instantRunSlicer/debug/9/com/example/android/bluetoothlegatt/DeviceControlActivity.class" afterPath="$PROJECT_DIR$/Application/build/intermediates/transforms/instantRunSlicer/debug/9/com/example/android/bluetoothlegatt/DeviceControlActivity.class" />
+      <change beforePath="$PROJECT_DIR$/Application/src/main/java/com/example/android/bluetoothlegatt/AvailableObj.java" afterPath="$PROJECT_DIR$/Application/src/main/java/com/example/android/bluetoothlegatt/AvailableObj.java" />
       <change beforePath="$PROJECT_DIR$/Application/src/main/java/com/example/android/bluetoothlegatt/BluetoothLeService.java" afterPath="$PROJECT_DIR$/Application/src/main/java/com/example/android/bluetoothlegatt/BluetoothLeService.java" />
-      <change beforePath="$PROJECT_DIR$/Application/src/main/java/com/example/android/bluetoothlegatt/Package_Auth.java" afterPath="$PROJECT_DIR$/Application/src/main/java/com/example/android/bluetoothlegatt/Package_Auth.java" />
-      <change beforePath="$PROJECT_DIR$/Application/src/main/java/com/example/android/bluetoothlegatt/Sddl.java" afterPath="$PROJECT_DIR$/Application/src/main/java/com/example/android/bluetoothlegatt/Sddl.java" />
+      <change beforePath="$PROJECT_DIR$/Application/src/main/java/com/example/android/bluetoothlegatt/ClientSecurityClass.java" afterPath="$PROJECT_DIR$/Application/src/main/java/com/example/android/bluetoothlegatt/ClientSecurityClass.java" />
+      <change beforePath="$PROJECT_DIR$/Application/src/main/java/com/example/android/bluetoothlegatt/DeviceControlActivity.java" afterPath="$PROJECT_DIR$/Application/src/main/java/com/example/android/bluetoothlegatt/DeviceControlActivity.java" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -77,13 +78,47 @@
       <file leaf-file-name="BluetoothLeService.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Application/src/main/java/com/example/android/bluetoothlegatt/BluetoothLeService.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="182">
-              <caret line="297" column="50" lean-forward="true" selection-start-line="297" selection-start-column="50" selection-end-line="297" selection-end-column="50" />
+            <state relative-caret-position="-654">
+              <caret line="208" column="91" lean-forward="false" selection-start-line="208" selection-start-column="91" selection-end-line="208" selection-end-column="91" />
               <folding>
-                <element signature="e#13777#13778#0" expanded="true" />
-                <element signature="e#13831#13832#0" expanded="true" />
-                <element signature="e#13895#13896#0" expanded="true" />
-                <element signature="e#13925#13926#0" expanded="true" />
+                <element signature="e#17782#17783#0" expanded="true" />
+                <element signature="e#17836#17837#0" expanded="true" />
+                <element signature="e#17900#17901#0" expanded="true" />
+                <element signature="e#17930#17931#0" expanded="true" />
+                <element signature="method#getSupportedGattServices#0;class#BluetoothLeService#0" expanded="false" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="AvailableObj.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Application/src/main/java/com/example/android/bluetoothlegatt/AvailableObj.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="261">
+              <caret line="19" column="33" lean-forward="false" selection-start-line="19" selection-start-column="33" selection-end-line="19" selection-end-column="33" />
+              <folding>
+                <element signature="e#485#486#0" expanded="true" />
+                <element signature="e#525#526#0" expanded="true" />
+                <element signature="e#575#576#0" expanded="true" />
+                <element signature="e#617#618#0" expanded="true" />
+                <element signature="e#669#670#0" expanded="true" />
+                <element signature="e#713#714#0" expanded="true" />
+                <element signature="e#751#752#0" expanded="true" />
+                <element signature="e#781#782#0" expanded="true" />
+                <element signature="e#836#837#0" expanded="true" />
+                <element signature="e#871#872#0" expanded="true" />
+                <element signature="e#929#930#0" expanded="true" />
+                <element signature="e#979#980#0" expanded="true" />
+                <element signature="e#1019#1020#0" expanded="true" />
+                <element signature="e#1055#1056#0" expanded="true" />
+                <element signature="e#1092#1093#0" expanded="true" />
+                <element signature="e#1125#1126#0" expanded="true" />
+                <element signature="e#1167#1168#0" expanded="true" />
+                <element signature="e#1198#1199#0" expanded="true" />
+                <element signature="e#1228#1229#0" expanded="true" />
+                <element signature="e#1254#1255#0" expanded="true" />
+                <element signature="e#1290#1291#0" expanded="true" />
+                <element signature="e#1322#1323#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -92,8 +127,41 @@
       <file leaf-file-name="Sddl.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Application/src/main/java/com/example/android/bluetoothlegatt/Sddl.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-1382">
-              <caret line="130" column="17" lean-forward="false" selection-start-line="130" selection-start-column="16" selection-end-line="130" selection-end-column="17" />
+            <state relative-caret-position="-202">
+              <caret line="60" column="16" lean-forward="false" selection-start-line="60" selection-start-column="16" selection-end-line="60" selection-end-column="16" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Package_Auth.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Application/src/main/java/com/example/android/bluetoothlegatt/Package_Auth.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="85">
+              <caret line="6" column="0" lean-forward="false" selection-start-line="6" selection-start-column="0" selection-end-line="6" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="DeviceControlActivity.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Application/src/main/java/com/example/android/bluetoothlegatt/DeviceControlActivity.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="147">
+              <caret line="258" column="38" lean-forward="false" selection-start-line="258" selection-start-column="38" selection-end-line="258" selection-end-column="38" />
+              <folding>
+                <element signature="e#3810#4808#0" expanded="true" />
+                <element signature="e#4807#4808#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ClientSecurityClass.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Application/src/main/java/com/example/android/bluetoothlegatt/ClientSecurityClass.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="146">
+              <caret line="19" column="47" lean-forward="false" selection-start-line="19" selection-start-column="47" selection-end-line="19" selection-end-column="47" />
               <folding />
             </state>
           </provider>
@@ -110,36 +178,36 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>AUTHENTICATION</find>
-      <find>read</find>
-      <find>get_authorization</find>
-      <find>SecureConnection</find>
-      <find>package_aut</find>
-      <find>SignST_Package_K</find>
-      <find>GenerateHelloMessagePack</find>
-      <find>convertToBytes</find>
-      <find>createPackage</find>
-      <find>createPackageK</find>
-      <find>writeCharacteristic</find>
-      <find>Long</find>
-      <find>CreatePackageK</find>
-      <find>Kcipher_obj</find>
-      <find>generateOTP</find>
-      <find>Kauth_obj</find>
-      <find>Kauth_sddl</find>
-      <find>Ksession</find>
-      <find>Synchronized</find>
-      <find>GenerateST_PackageK</find>
-      <find>CheckSignForHelloMessage</find>
-      <find>hub_id</find>
+      <find>timestam</find>
+      <find>Resposta recebida do</find>
+      <find>REsposta:</find>
+      <find>sendData</find>
+      <find>display</find>
       <find>GenerateHelloMessage</find>
-      <find>AQUI</find>
-      <find>LENGTH:</find>
-      <find>Value=</find>
-      <find>print_h</find>
-      <find>o</find>
-      <find>onchar</find>
-      <find>onwrite</find>
+      <find>onClickRead</find>
+      <find>getMacAddress</find>
+      <find>device</find>
+      <find>address</find>
+      <find>OTP</find>
+      <find>checksign</find>
+      <find>CheckSignForHello</find>
+      <find>getOTP</find>
+      <find>broadcastUpdate</find>
+      <find>getOBJ</find>
+      <find>getOBJ_index</find>
+      <find>SecureConnection();</find>
+      <find>checkAuth</find>
+      <find>ENDERECOOO</find>
+      <find>getOBJ</find>
+      <find>getIndex_IdFix</find>
+      <find>writeCustomCharacteristic</find>
+      <find>Write Response</find>
+      <find>getHelloAcceptedMessage</find>
+      <find>Timestamp</find>
+      <find>GenerateHMAC</find>
+      <find>CheckSignForHelloAcceptedMessage</find>
+      <find>ObjList</find>
+      <find>StoreKey</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -1873,14 +1941,15 @@
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/Application/src/main/java/com/example/android/bluetoothlegatt/Obj.java" />
-        <option value="$PROJECT_DIR$/Application/src/main/java/com/example/android/bluetoothlegatt/ClientSecurityClass.java" />
         <option value="$PROJECT_DIR$/Application/src/main/java/com/example/android/bluetoothlegatt/Package_Auth.java" />
-        <option value="$PROJECT_DIR$/Application/src/main/java/com/example/android/bluetoothlegatt/AvailableObj.java" />
         <option value="$PROJECT_DIR$/Application/src/main/java/com/example/android/bluetoothlegatt/HelloMessage.java" />
         <option value="$PROJECT_DIR$/Application/src/main/java/com/example/android/bluetoothlegatt/HelloMessagePack.java" />
         <option value="$PROJECT_DIR$/Application/src/main/java/com/example/android/bluetoothlegatt/PackageK.java" />
-        <option value="$PROJECT_DIR$/Application/src/main/java/com/example/android/bluetoothlegatt/BluetoothLeService.java" />
         <option value="$PROJECT_DIR$/Application/src/main/java/com/example/android/bluetoothlegatt/Sddl.java" />
+        <option value="$PROJECT_DIR$/Application/src/main/java/com/example/android/bluetoothlegatt/DeviceControlActivity.java" />
+        <option value="$PROJECT_DIR$/Application/src/main/java/com/example/android/bluetoothlegatt/AvailableObj.java" />
+        <option value="$PROJECT_DIR$/Application/src/main/java/com/example/android/bluetoothlegatt/ClientSecurityClass.java" />
+        <option value="$PROJECT_DIR$/Application/src/main/java/com/example/android/bluetoothlegatt/BluetoothLeService.java" />
       </list>
     </option>
   </component>
@@ -2133,7 +2202,7 @@
       <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.28618422" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3223684" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Captures" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -2163,10 +2232,11 @@
         <state relative-caret-position="5729">
           <caret line="379" column="43" lean-forward="false" selection-start-line="379" selection-start-column="43" selection-end-line="379" selection-end-column="43" />
           <folding>
-            <element signature="e#13777#13778#0" expanded="true" />
-            <element signature="e#13831#13832#0" expanded="true" />
-            <element signature="e#13895#13896#0" expanded="true" />
-            <element signature="e#13925#13926#0" expanded="true" />
+            <element signature="e#17782#17783#0" expanded="true" />
+            <element signature="e#17836#17837#0" expanded="true" />
+            <element signature="e#17900#17901#0" expanded="true" />
+            <element signature="e#17930#17931#0" expanded="true" />
+            <element signature="method#getSupportedGattServices#0;class#BluetoothLeService#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -2245,22 +2315,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Application/src/main/java/com/example/android/bluetoothlegatt/DeviceControlActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3740">
-          <caret line="260" column="40" lean-forward="false" selection-start-line="260" selection-start-column="40" selection-end-line="260" selection-end-column="40" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Application/src/main/java/com/example/android/bluetoothlegatt/AvailableObj.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119">
-          <caret line="7" column="17" lean-forward="false" selection-start-line="7" selection-start-column="4" selection-end-line="7" selection-end-column="17" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Application/src/main/java/com/example/android/bluetoothlegatt/Hub.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="51">
@@ -2293,18 +2347,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$USER_HOME$/AppData/Local/Android/Sdk/sources/android-27/android/bluetooth/BluetoothGatt.java">
+    <entry file="file://$PROJECT_DIR$/Application/src/main/java/com/example/android/bluetoothlegatt/Obj.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-233">
-          <caret line="1106" column="19" lean-forward="false" selection-start-line="1106" selection-start-column="19" selection-end-line="1106" selection-end-column="19" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Application/src/main/java/com/example/android/bluetoothlegatt/ClientSecurityClass.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="680">
-          <caret line="48" column="31" lean-forward="false" selection-start-line="48" selection-start-column="31" selection-end-line="48" selection-end-column="31" />
+        <state relative-caret-position="0">
+          <caret line="0" column="8" lean-forward="false" selection-start-line="0" selection-start-column="8" selection-end-line="0" selection-end-column="8" />
           <folding />
         </state>
       </provider>
@@ -2317,31 +2363,82 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Application/src/main/java/com/example/android/bluetoothlegatt/Obj.java">
+    <entry file="file://$PROJECT_DIR$/Application/src/main/java/com/example/android/bluetoothlegatt/DeviceControlActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="8" lean-forward="false" selection-start-line="0" selection-start-column="8" selection-end-line="0" selection-end-column="8" />
+        <state relative-caret-position="147">
+          <caret line="258" column="38" lean-forward="false" selection-start-line="258" selection-start-column="38" selection-end-line="258" selection-end-column="38" />
+          <folding>
+            <element signature="e#3810#4808#0" expanded="true" />
+            <element signature="e#4807#4808#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/AppData/Local/Android/Sdk/sources/android-27/android/bluetooth/BluetoothGatt.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="72">
+          <caret line="1029" column="19" lean-forward="false" selection-start-line="1029" selection-start-column="19" selection-end-line="1029" selection-end-column="19" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Application/src/main/java/com/example/android/bluetoothlegatt/Sddl.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1382">
-          <caret line="130" column="17" lean-forward="false" selection-start-line="130" selection-start-column="16" selection-end-line="130" selection-end-column="17" />
+        <state relative-caret-position="-202">
+          <caret line="60" column="16" lean-forward="false" selection-start-line="60" selection-start-column="16" selection-end-line="60" selection-end-column="16" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Application/src/main/java/com/example/android/bluetoothlegatt/ClientSecurityClass.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="146">
+          <caret line="19" column="47" lean-forward="false" selection-start-line="19" selection-start-column="47" selection-end-line="19" selection-end-column="47" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Application/src/main/java/com/example/android/bluetoothlegatt/AvailableObj.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="261">
+          <caret line="19" column="33" lean-forward="false" selection-start-line="19" selection-start-column="33" selection-end-line="19" selection-end-column="33" />
+          <folding>
+            <element signature="e#485#486#0" expanded="true" />
+            <element signature="e#525#526#0" expanded="true" />
+            <element signature="e#575#576#0" expanded="true" />
+            <element signature="e#617#618#0" expanded="true" />
+            <element signature="e#669#670#0" expanded="true" />
+            <element signature="e#713#714#0" expanded="true" />
+            <element signature="e#751#752#0" expanded="true" />
+            <element signature="e#781#782#0" expanded="true" />
+            <element signature="e#836#837#0" expanded="true" />
+            <element signature="e#871#872#0" expanded="true" />
+            <element signature="e#929#930#0" expanded="true" />
+            <element signature="e#979#980#0" expanded="true" />
+            <element signature="e#1019#1020#0" expanded="true" />
+            <element signature="e#1055#1056#0" expanded="true" />
+            <element signature="e#1092#1093#0" expanded="true" />
+            <element signature="e#1125#1126#0" expanded="true" />
+            <element signature="e#1167#1168#0" expanded="true" />
+            <element signature="e#1198#1199#0" expanded="true" />
+            <element signature="e#1228#1229#0" expanded="true" />
+            <element signature="e#1254#1255#0" expanded="true" />
+            <element signature="e#1290#1291#0" expanded="true" />
+            <element signature="e#1322#1323#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Application/src/main/java/com/example/android/bluetoothlegatt/BluetoothLeService.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="182">
-          <caret line="297" column="50" lean-forward="true" selection-start-line="297" selection-start-column="50" selection-end-line="297" selection-end-column="50" />
+        <state relative-caret-position="-654">
+          <caret line="208" column="91" lean-forward="false" selection-start-line="208" selection-start-column="91" selection-end-line="208" selection-end-column="91" />
           <folding>
-            <element signature="e#13777#13778#0" expanded="true" />
-            <element signature="e#13831#13832#0" expanded="true" />
-            <element signature="e#13895#13896#0" expanded="true" />
-            <element signature="e#13925#13926#0" expanded="true" />
+            <element signature="e#17782#17783#0" expanded="true" />
+            <element signature="e#17836#17837#0" expanded="true" />
+            <element signature="e#17900#17901#0" expanded="true" />
+            <element signature="e#17930#17931#0" expanded="true" />
+            <element signature="method#getSupportedGattServices#0;class#BluetoothLeService#0" expanded="false" />
           </folding>
         </state>
       </provider>

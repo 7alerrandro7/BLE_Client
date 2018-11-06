@@ -17,7 +17,7 @@ public class ClientSecurityClass {
 
     public static String Decrypt(byte[] text) throws NoSuchPaddingException, NoSuchAlgorithmException, InvalidKeyException, UnsupportedEncodingException {
 
-        Log.d(TAG, "Bytes = " + text);
+        Log.d(TAG, "Bytes = " + text.toString());
 
         byte [] key = "AAAAA".getBytes("ASCII");
 
