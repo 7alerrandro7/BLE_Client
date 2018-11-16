@@ -16,8 +16,13 @@ public class AvailableObj {
         this.OTP = OTP;
     }
 
-    public AvailableObj(String obj_id) {
-        this.obj_id_fix = obj_id;
+    public AvailableObj(String obj_id_fix) {
+        this.obj_id_fix = obj_id_fix;
+    }
+
+    public AvailableObj(String obj_id_fix, String obj_id_random) {
+        this.obj_id_fix = obj_id_fix;
+        this.obj_id_random = obj_id_random;
     }
 
     public void setTimestamp(byte[] timestamp) {

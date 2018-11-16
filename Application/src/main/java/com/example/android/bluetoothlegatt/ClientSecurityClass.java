@@ -31,6 +31,19 @@ public class ClientSecurityClass {
 
     }
 
+    public static byte[] Decrypt(byte[] text, SecretKeySpec Ksession) throws NoSuchPaddingException, NoSuchAlgorithmException, InvalidKeyException, UnsupportedEncodingException {
+
+        Log.d(TAG, "Bytes = " + text.toString());
+
+        Cipher rc4 = Cipher.getInstance("RC4");
+        rc4.init(Cipher.DECRYPT_MODE, Ksession);
+
+        byte [] cipherText = rc4.update(text);
+
+        return(cipherText);
+
+    }
+
     public static byte[] Encrypt(String text) throws UnsupportedEncodingException, InvalidKeyException, NoSuchPaddingException, NoSuchAlgorithmException {
 
         byte[] plainText = text.getBytes("ASCII");
