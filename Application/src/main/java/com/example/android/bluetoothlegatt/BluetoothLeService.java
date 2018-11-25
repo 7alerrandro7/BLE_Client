@@ -142,9 +142,7 @@ public class BluetoothLeService extends Service {
 
             Hello_Message_HMAC = mac.doFinal(pack.getBytes("ASCII"));
 
-        } catch (UnsupportedEncodingException e) {
-        } catch (InvalidKeyException e) {
-        } catch (NoSuchAlgorithmException e) {
+        } catch (UnsupportedEncodingException | InvalidKeyException | NoSuchAlgorithmException ignored) {
         }
 
         return Hello_Message_HMAC;
@@ -167,9 +165,7 @@ public class BluetoothLeService extends Service {
 
             Hello_Accepted_Message_HMAC = mac.doFinal(pack.getBytes("ASCII"));
 
-        } catch (UnsupportedEncodingException e) {
-        } catch (InvalidKeyException e) {
-        } catch (NoSuchAlgorithmException e) {
+        } catch (UnsupportedEncodingException | InvalidKeyException | NoSuchAlgorithmException e) {
         }
 
         return Hello_Accepted_Message_HMAC;
@@ -177,8 +173,7 @@ public class BluetoothLeService extends Service {
 
     private byte[] signHelloMessage(String hub_id, byte[] OTP, byte [] HelloMessage){
         SecretKeySpec Kauth_hub = Generate_Hub_Auth_Key(OTP);
-        byte[] Hello_Message_HMAC = GenerateHMAC(hub_id, HelloMessage, Kauth_hub);
-        return Hello_Message_HMAC;
+        return GenerateHMAC(hub_id, HelloMessage, Kauth_hub);
     }
 
     private String getBluetoothMacAddress() {
@@ -192,10 +187,7 @@ public class BluetoothLeService extends Service {
                 if (btManagerService != null) {
                     bluetoothMacAddress = (String) btManagerService.getClass().getMethod("getAddress").invoke(btManagerService);
                 }
-            } catch (NoSuchFieldException e) {
-            } catch (NoSuchMethodException e) {
-            } catch (IllegalAccessException e) {
-            } catch (InvocationTargetException e) {
+            } catch (NoSuchFieldException | IllegalAccessException | NoSuchMethodException | InvocationTargetException e) {
             }
         } else {
             bluetoothMacAddress = bluetoothAdapter.getAddress();
@@ -205,7 +197,6 @@ public class BluetoothLeService extends Service {
 
     private void SecureConnection(){
         getMacAddress();
-        return;
     }
 
     private void checkAuth(String obj_id){
@@ -408,7 +399,7 @@ public class BluetoothLeService extends Service {
             }
             if(characteristic.getUuid().equals(SET_MAC_UUID)){
                 for(int i=0; i<ObjList.size(); i++) {
-                    if(ObjList.get(i).getObj_id_random() == mBluetoothDeviceAddress){
+                    if(mBluetoothDeviceAddress.equals(ObjList.get(i).getObj_id_random())){
                         checkAuth(ObjList.get(i).getObj_id_fix());
                     }
                 }
@@ -439,13 +430,7 @@ public class BluetoothLeService extends Service {
         byte[] text = null;
         try {
             text = ClientSecurityClass.Decrypt(characteristic.getValue(), Ksession);
-        } catch (NoSuchPaddingException e) {
-            e.printStackTrace();
-        } catch (NoSuchAlgorithmException e) {
-            e.printStackTrace();
-        } catch (InvalidKeyException e) {
-            e.printStackTrace();
-        } catch (UnsupportedEncodingException e) {
+        } catch (NoSuchPaddingException | NoSuchAlgorithmException | UnsupportedEncodingException | InvalidKeyException e) {
             e.printStackTrace();
         }
         intent.putExtra(EXTRA_DATA, text);
