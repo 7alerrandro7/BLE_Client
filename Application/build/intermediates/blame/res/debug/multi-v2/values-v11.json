@@ -1,10 +1,10 @@
 {
     "logs": [
         {
-            "outputFile": "C:\\Users\\Alessandro Faletti\\Documents\\Projeto Final\\Projeto\\BLE_Client\\Application\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-v11\\values-v11.xml",
+            "outputFile": "C:\\Users\\aless\\Documents\\_Dev\\Projeto_Final\\BLE_Client\\Application\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-v11\\values-v11.xml",
             "map": [
                 {
-                    "source": "C:\\Users\\Alessandro Faletti\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-27.0.2.aar\\ab0e713ce0fadbadfac9cbc5ee7c5a41\\res\\values-v11\\values-v11.xml",
+                    "source": "C:\\Users\\aless\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-27.0.2.aar\\d99047223cdae4d5ca626121f184208b\\res\\values-v11\\values-v11.xml",
                     "from": {
                         "startLines": "2,8,14,20,26,32,38,39,43,47,48,52,56,57,61,66,71,76,78,80,81,82,136,191",
                         "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",
@@ -15,13 +15,13 @@
                     }
                 },
                 {
-                    "source": "C:\\Users\\Alessandro Faletti\\Documents\\Projeto Final\\Projeto\\BLE_Client\\Application\\src\\main\\res\\values-v11\\template-styles.xml",
+                    "source": "C:\\Users\\aless\\Documents\\_Dev\\Projeto_Final\\BLE_Client\\Application\\src\\main\\res\\values-v11\\template-styles.xml",
                     "from": {
                         "startLines": "19",
                         "startColumns": "4",
-                        "startOffsets": "650",
+                        "startOffsets": "669",
                         "endColumns": "65",
-                        "endOffsets": "711"
+                        "endOffsets": "730"
                     },
                     "to": {
                         "startLines": "192",

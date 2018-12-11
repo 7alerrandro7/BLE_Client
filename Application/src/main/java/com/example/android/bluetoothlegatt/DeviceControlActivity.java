@@ -50,10 +50,15 @@ import javax.crypto.NoSuchPaddingException;
 public class DeviceControlActivity extends Activity {
     private final static String TAG = DeviceControlActivity.class.getSimpleName();
 
+    //Depuração de performance.
+    private long tempoInicial;
+
     public static final String EXTRAS_DEVICE_NAME = "DEVICE_NAME";
     public static final String EXTRAS_DEVICE_ADDRESS = "DEVICE_ADDRESS";
 
-    private TextView mDataField;
+    private TextView mStatus;
+    private TextView mTime;
+
     private TextView mDataField_Security;
     private String mDeviceName;
     private String mDeviceAddress;
@@ -91,25 +96,25 @@ public class DeviceControlActivity extends Activity {
         public void onReceive(Context context, Intent intent) {
             final String action = intent.getAction();
             if (BluetoothLeService.ACTION_GATT_CONNECTED.equals(action)) {
+                tempoInicial = System.currentTimeMillis();
                 mConnected = true;
                 invalidateOptionsMenu();
             } else if (BluetoothLeService.ACTION_GATT_DISCONNECTED.equals(action)) {
                 mConnected = false;
                 invalidateOptionsMenu();
                 clearUI();
+            } else if (BluetoothLeService.AUTHENTICATED.equals(action)) {
+                mStatus.setText("Autenticado!");
+                mTime.setText(String.valueOf(System.currentTimeMillis() - tempoInicial) + " ms");
             } else if (BluetoothLeService.ACTION_DATA_AVAILABLE.equals(action)) {
                 byte[] msg = intent.getByteArrayExtra(BluetoothLeService.EXTRA_DATA);
-                try {
-                    displayData(msg);
-                } catch (UnsupportedEncodingException e) {
-                    e.printStackTrace();
-                }
+                displayData(msg);
             }
         }
     };
 
     private void clearUI() {
-        mDataField.setText(R.string.no_data);
+        mDataField_Security.setText("Sem dados");
     }
 
     @Override
@@ -121,9 +126,10 @@ public class DeviceControlActivity extends Activity {
         final Intent intent = getIntent();
         mDeviceName = intent.getStringExtra(EXTRAS_DEVICE_NAME);
         mDeviceAddress = intent.getStringExtra(EXTRAS_DEVICE_ADDRESS);
-
-        mDataField = findViewById(R.id.data_value);
         mDataField_Security = findViewById(R.id.security_value);
+
+        mStatus = findViewById(R.id.status);
+        mTime = findViewById(R.id.time);
 
         getActionBar().setTitle(mDeviceName);
         getActionBar().setDisplayHomeAsUpEnabled(true);
@@ -189,53 +195,32 @@ public class DeviceControlActivity extends Activity {
         intentFilter.addAction(BluetoothLeService.ACTION_GATT_DISCONNECTED);
         intentFilter.addAction(BluetoothLeService.ACTION_GATT_SERVICES_DISCOVERED);
         intentFilter.addAction(BluetoothLeService.ACTION_DATA_AVAILABLE);
+        intentFilter.addAction(BluetoothLeService.AUTHENTICATED);
         return intentFilter;
     }
 
     public void onClickWrite(View v){
         if(mBluetoothLeService != null) {
             EditText text_field;
-            text_field = (EditText)findViewById(R.id.write_plain_text);
+            text_field = findViewById(R.id.write_plain_text);
             String text = text_field.getText().toString();
             Log.d(TAG, "TEXTO LIMPOOO= " + text);
-            byte [] text_in_bytes = new byte[0];
 
             try {
-                text_in_bytes = ClientSecurityClass.Encrypt(text);
+                mBluetoothLeService.WriteCharacteristic(text.getBytes("ASCII"));
             } catch (UnsupportedEncodingException e) {
                 e.printStackTrace();
-            } catch (InvalidKeyException e) {
-                e.printStackTrace();
-            } catch (NoSuchPaddingException e) {
-                e.printStackTrace();
-            } catch (NoSuchAlgorithmException e) {
-                e.printStackTrace();
-            }
-
-            if(text_in_bytes != null){
-                mBluetoothLeService.AuthCharacteristic(text_in_bytes);
-            }else{
-                Log.w(TAG, "Null value");
             }
         }
     }
 
-    private void displayData(byte[] data) throws UnsupportedEncodingException {
-        String text = "";
+    private void displayData(byte[] data) {
         if (data != null) {
-            mDataField.setText(new String(data, "UTF8"));
-
             try {
-                text = ClientSecurityClass.Decrypt(data);
-            } catch (NoSuchPaddingException e) {
-                e.printStackTrace();
-            } catch (NoSuchAlgorithmException e) {
-                e.printStackTrace();
-            } catch (InvalidKeyException e) {
+                mDataField_Security.setText(new String(data, "ASCII"));
+            } catch (UnsupportedEncodingException e) {
                 e.printStackTrace();
             }
-
-            mDataField_Security.setText(text);
         }
     }
 

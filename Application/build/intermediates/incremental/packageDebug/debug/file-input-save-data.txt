@@ -1,17 +1,17 @@
 #Internal package file, do not edit.
-#Mon Nov 12 23:03:02 BRST 2018
-2.base=C\:\\Users\\Alessandro Faletti\\Documents\\Projeto Final\\Projeto\\BLE_Client\\Application\\build\\intermediates\\transforms\\dexMerger\\debug\\31
+#Mon Dec 10 15:15:55 BRST 2018
+2.base=C\:\\Users\\aless\\Documents\\_Dev\\Projeto_Final\\BLE_Client\\Application\\build\\intermediates\\transforms\\dexMerger\\debug\\55
 5.set=DEX
 0.path=classes.dex
 2.baseType=DIRECTORY
-3.base=C\:\\Users\\Alessandro Faletti\\Documents\\Projeto Final\\Projeto\\BLE_Client\\Application\\build\\intermediates\\transforms\\dexMerger\\debug\\36
+3.base=C\:\\Users\\aless\\Documents\\_Dev\\Projeto_Final\\BLE_Client\\Application\\build\\intermediates\\transforms\\dexMerger\\debug\\52
 2.set=DEX
 1.path=classes.dex
-4.base=C\:\\Users\\Alessandro Faletti\\Documents\\Projeto Final\\Projeto\\BLE_Client\\Application\\build\\intermediates\\transforms\\dexMerger\\debug\\33
+4.base=C\:\\Users\\aless\\Documents\\_Dev\\Projeto_Final\\BLE_Client\\Application\\build\\intermediates\\transforms\\dexMerger\\debug\\51
 count=6
 5.baseType=DIRECTORY
 2.path=classes.dex
-5.base=C\:\\Users\\Alessandro Faletti\\Documents\\Projeto Final\\Projeto\\BLE_Client\\Application\\build\\intermediates\\transforms\\dexMerger\\debug\\35
+5.base=C\:\\Users\\aless\\Documents\\_Dev\\Projeto_Final\\BLE_Client\\Application\\build\\intermediates\\transforms\\dexMerger\\debug\\54
 4.set=DEX
 3.path=classes.dex
 3.baseType=DIRECTORY
@@ -19,9 +19,9 @@ count=6
 4.path=classes.dex
 1.baseType=DIRECTORY
 5.path=classes.dex
-0.base=C\:\\Users\\Alessandro Faletti\\Documents\\Projeto Final\\Projeto\\BLE_Client\\Application\\build\\intermediates\\transforms\\dexMerger\\debug\\32
+0.base=C\:\\Users\\aless\\Documents\\_Dev\\Projeto_Final\\BLE_Client\\Application\\build\\intermediates\\transforms\\dexMerger\\debug\\53
 0.baseType=DIRECTORY
 3.set=DEX
-1.base=C\:\\Users\\Alessandro Faletti\\Documents\\Projeto Final\\Projeto\\BLE_Client\\Application\\build\\intermediates\\transforms\\dexMerger\\debug\\34
+1.base=C\:\\Users\\aless\\Documents\\_Dev\\Projeto_Final\\BLE_Client\\Application\\build\\intermediates\\transforms\\dexMerger\\debug\\50
 4.baseType=DIRECTORY
 0.set=DEX

@@ -1,4 +1,4 @@
-#Fri Nov 16 20:10:45 BRST 2018
+#Mon Dec 10 15:15:54 BRST 2018
 path.1=classes.dex
 path.0=classes.dex
 renamed.5=classes6.dex
@@ -7,12 +7,12 @@ renamed.3=classes4.dex
 renamed.2=classes3.dex
 renamed.1=classes2.dex
 renamed.0=classes.dex
-base.5=C\:\\Users\\Alessandro Faletti\\Documents\\Projeto Final\\Projeto\\BLE_Client\\Application\\build\\intermediates\\transforms\\dexMerger\\debug\\32
-base.4=C\:\\Users\\Alessandro Faletti\\Documents\\Projeto Final\\Projeto\\BLE_Client\\Application\\build\\intermediates\\transforms\\dexMerger\\debug\\34
-base.3=C\:\\Users\\Alessandro Faletti\\Documents\\Projeto Final\\Projeto\\BLE_Client\\Application\\build\\intermediates\\transforms\\dexMerger\\debug\\31
-base.2=C\:\\Users\\Alessandro Faletti\\Documents\\Projeto Final\\Projeto\\BLE_Client\\Application\\build\\intermediates\\transforms\\dexMerger\\debug\\36
-base.1=C\:\\Users\\Alessandro Faletti\\Documents\\Projeto Final\\Projeto\\BLE_Client\\Application\\build\\intermediates\\transforms\\dexMerger\\debug\\33
-base.0=C\:\\Users\\Alessandro Faletti\\Documents\\Projeto Final\\Projeto\\BLE_Client\\Application\\build\\intermediates\\transforms\\dexMerger\\debug\\35
+base.5=C\:\\Users\\aless\\Documents\\_Dev\\Projeto_Final\\BLE_Client\\Application\\build\\intermediates\\transforms\\dexMerger\\debug\\53
+base.4=C\:\\Users\\aless\\Documents\\_Dev\\Projeto_Final\\BLE_Client\\Application\\build\\intermediates\\transforms\\dexMerger\\debug\\50
+base.3=C\:\\Users\\aless\\Documents\\_Dev\\Projeto_Final\\BLE_Client\\Application\\build\\intermediates\\transforms\\dexMerger\\debug\\55
+base.2=C\:\\Users\\aless\\Documents\\_Dev\\Projeto_Final\\BLE_Client\\Application\\build\\intermediates\\transforms\\dexMerger\\debug\\52
+base.1=C\:\\Users\\aless\\Documents\\_Dev\\Projeto_Final\\BLE_Client\\Application\\build\\intermediates\\transforms\\dexMerger\\debug\\54
+base.0=C\:\\Users\\aless\\Documents\\_Dev\\Projeto_Final\\BLE_Client\\Application\\build\\intermediates\\transforms\\dexMerger\\debug\\51
 path.5=classes.dex
 path.4=classes.dex
 path.3=classes.dex

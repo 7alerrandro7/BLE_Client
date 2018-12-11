@@ -13,7 +13,6 @@ import javax.crypto.spec.SecretKeySpec;
 public class ClientSecurityClass {
 
     public static final String TAG = "SecurityClass_LOG";
-    //final static String path = Environment.getExternalStorageDirectory().getPath() + "/keys/";
 
     public static String Decrypt(byte[] text) throws NoSuchPaddingException, NoSuchAlgorithmException, InvalidKeyException, UnsupportedEncodingException {
 
@@ -58,20 +57,22 @@ public class ClientSecurityClass {
 
         byte [] cipherText = rc4.update(plainText);
 
-        // converte o cipherText para hexadecimal
-        if(cipherText != null){
-            StringBuffer buf = new StringBuffer();
-            for(int i = 0; i < cipherText.length; i++) {
-                String hex = Integer.toHexString(0x0100 + (cipherText[i] & 0x00FF)).substring(1);
-                buf.append((hex.length() < 2 ? "0" : "") + hex);
-            }
-
-            // imprime o ciphertext em hexadecimal
-            Log.i(TAG, "Texto criptografado: " + buf.toString());
-        }
-
         return(cipherText);
 
+    }
+
+    public static byte[] Encrypt(byte[] plainText, SecretKeySpec Ksession){
+        Cipher rc4 = null;
+        try {
+            rc4 = Cipher.getInstance("RC4");
+            rc4.init(Cipher.ENCRYPT_MODE, Ksession);
+        } catch (NoSuchAlgorithmException | NoSuchPaddingException | InvalidKeyException e ) {
+            e.printStackTrace();
+        }
+
+        byte [] cipherText = rc4.update(plainText);
+
+        return(cipherText);
     }
 
 }

@@ -30,6 +30,7 @@ import android.content.Intent;
 import android.os.Binder;
 import android.os.IBinder;
 import android.util.Log;
+import android.widget.TextView;
 
 import java.io.UnsupportedEncodingException;
 import java.lang.reflect.Field;
@@ -74,6 +75,7 @@ public class BluetoothLeService extends Service {
     public final static String ACTION_GATT_DISCONNECTED = "com.example.bluetooth.le.ACTION_GATT_DISCONNECTED";
     public final static String ACTION_GATT_SERVICES_DISCOVERED = "com.example.bluetooth.le.ACTION_GATT_SERVICES_DISCOVERED";
     public final static String ACTION_DATA_AVAILABLE = "com.example.bluetooth.le.ACTION_DATA_AVAILABLE";
+    public final static String AUTHENTICATED = "authenticated";
     public final static String EXTRA_DATA = "com.example.bluetooth.le.EXTRA_DATA";
 
     /* Current Security Service UUID */
@@ -88,6 +90,8 @@ public class BluetoothLeService extends Service {
     public static UUID SET_MAC_UUID = UUID.fromString("00000001-0000-1000-8000-00605f9b34fb");
     /* Mandatory Read Information Characteristic */
     public static UUID READ_UUID = UUID.fromString("00002a2b-0000-1000-8000-00105f9b34fb");
+    /* Mandatory Custom Write Information Characteristic */
+    public static UUID WRITE_UUID = UUID.fromString("00000001-0000-1000-8000-00705f9b34fb");
 
     //Função que armazena a chave de sessão, o id do IoT e o OTP(One Time Password) no Database
     private boolean StoreKey(String obj_id_fix, String obj_id_random, SecretKeySpec Ksession, byte[] OTP, byte[] timestamp){
@@ -97,6 +101,24 @@ public class BluetoothLeService extends Service {
         ObjList.get(index).setKsession(Ksession);
         ObjList.get(index).setTimestamp(timestamp);
         return true;
+    }
+
+    //Função que envia a mensagem criptografada
+    private void sendSecurityValue(byte[] value, BluetoothGattCharacteristic characteristic){
+        for(int i=0; i<ObjList.size(); i++) {
+            if(mBluetoothDeviceAddress.equals(ObjList.get(i).getObj_id_random())){
+                byte[] text = ClientSecurityClass.Encrypt(value, ObjList.get(i).getKsession());
+                characteristic.setValue(text);
+                if (!mBluetoothGatt.writeCharacteristic(characteristic)) {
+                    Log.w(TAG, "Failed to write characteristic");
+                }
+                try {
+                    Log.d(TAG,"Valor: " +  new String(text, "ASCII"));
+                } catch (UnsupportedEncodingException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
     }
 
     //Função que gera a mensagem criptografada ao ser enviada para o S-OBJ
@@ -336,6 +358,7 @@ public class BluetoothLeService extends Service {
         public void onConnectionStateChange(BluetoothGatt gatt, int status, int newState) {
             String intentAction;
             if (newState == BluetoothProfile.STATE_CONNECTED) {
+
                 intentAction = ACTION_GATT_CONNECTED;
                 mConnectionState = STATE_CONNECTED;
                 broadcastUpdate(intentAction);
@@ -373,6 +396,7 @@ public class BluetoothLeService extends Service {
                 int index = getIndex_IdRandom(gatt.getDevice().getAddress());
                 if(CheckSignForHelloAcceptedMessage(MacAddress, ObjList.get(index).getObj_id_fix(), ObjList.get(index).getTimestamp(), ObjList.get(index).getOTP(), AcceptedHelloMsg)){
                     Log.d(TAG, "Estou autenticado!!!");
+                    broadcastUpdate(AUTHENTICATED, characteristic);
                 }else{
                     Log.d(TAG, "Não estou autenticado T-T");
                 }
@@ -436,26 +460,6 @@ public class BluetoothLeService extends Service {
         intent.putExtra(EXTRA_DATA, text);
         sendBroadcast(intent);
     }
-
-//    private void broadcastUpdate(final String action, final BluetoothGattCharacteristic characteristic, String ObjAddress) {
-//        final Intent intent = new Intent(action);
-//        // Broadcast the information of a characteristic.
-//        intent.putExtra(EXTRA_DATA, characteristic.getValue());
-//        sendBroadcast(intent);
-//        if(characteristic.getUuid().equals(GET_MAC_UUID)){
-//            String objId = characteristic.getStringValue(0);
-//            ObjList.add(new AvailableObj(objId));
-//            checkAuth(objId);
-//        }else if(characteristic.getUuid().equals(GET_HELLO_UUID)){
-//            byte[] AcceptedHelloMsg = characteristic.getValue();
-//            int index = getIndex_IdRandom(ObjAddress);
-//            if(CheckSignForHelloAcceptedMessage(mBluetoothAdapter.getAddress(), ObjList.get(index).getObj_id_fix(), ObjList.get(index).getTimestamp(), ObjList.get(index).getOTP(), AcceptedHelloMsg)){
-//                Log.d(TAG, "Estou autenticado!!!");
-//            }else{
-//                Log.d(TAG, "Não estou autenticado T-T");
-//            }
-//        }
-//    }
 
     public class LocalBinder extends Binder {
         BluetoothLeService getService() {
@@ -578,13 +582,13 @@ public class BluetoothLeService extends Service {
      *
      * @param characteristic The characteristic to read from.
      */
-    public void readCharacteristic(BluetoothGattCharacteristic characteristic) {
-        if (mBluetoothAdapter == null || mBluetoothGatt == null) {
-            Log.w(TAG, "BluetoothAdapter not initialized");
-            return;
-        }
-        mBluetoothGatt.readCharacteristic(characteristic);
-    }
+//    public void readCharacteristic(BluetoothGattCharacteristic characteristic) {
+//        if (mBluetoothAdapter == null || mBluetoothGatt == null) {
+//            Log.w(TAG, "BluetoothAdapter not initialized");
+//            return;
+//        }
+//        mBluetoothGatt.readCharacteristic(characteristic);
+//    }
 
     /**
      * Retrieves a list of supported GATT services on the connected device. This should be
@@ -592,11 +596,11 @@ public class BluetoothLeService extends Service {
      *
      * @return A {@code List} of supported services.
      */
-    public List<BluetoothGattService> getSupportedGattServices() {
-        if (mBluetoothGatt == null)
-            return null;
-        return mBluetoothGatt.getServices();
-    }
+//    public List<BluetoothGattService> getSupportedGattServices() {
+//        if (mBluetoothGatt == null)
+//            return null;
+//        return mBluetoothGatt.getServices();
+//    }
 
     public void getHelloAcceptedMessage() {
         if (mBluetoothAdapter == null || mBluetoothGatt == null) {
@@ -667,14 +671,32 @@ public class BluetoothLeService extends Service {
             return;
         }
         /*get the write characteristic from the service*/
-        BluetoothGattCharacteristic mWriteCharacteristic = mSecurityService.getCharacteristic(AUTH_WRITE_UUID);
+        BluetoothGattCharacteristic mAuthCharacteristic = mSecurityService.getCharacteristic(AUTH_WRITE_UUID);
         if (value != null) {
-            sendData(value, mWriteCharacteristic);
+            sendData(value, mAuthCharacteristic);
             //mWriteCharacteristic.setValue(value);
         }
         //if(!mBluetoothGatt.writeCharacteristic(mWriteCharacteristic)){
         //    Log.w(TAG, "Failed to write characteristic");
         //}
+    }
+
+    public void WriteCharacteristic(byte[] value) {
+        if (mBluetoothAdapter == null || mBluetoothGatt == null) {
+            Log.w(TAG, "BluetoothAdapter not initialized");
+            return;
+        }
+        /*check if the service is available on the device*/
+        BluetoothGattService mSecurityService = mBluetoothGatt.getService(SECURITY_SERVICE);
+        if(mSecurityService == null){
+            Log.w(TAG, "Custom BLE Service not found");
+            return;
+        }
+        /*get the write characteristic from the service*/
+        BluetoothGattCharacteristic mWriteCharacteristic = mSecurityService.getCharacteristic(WRITE_UUID);
+        if (value != null) {
+            sendSecurityValue(value, mWriteCharacteristic);
+        }
     }
 
     public void sendMacAddress(byte[] value) {
@@ -699,6 +721,5 @@ public class BluetoothLeService extends Service {
         } else {
             Log.w(TAG, "Failed to write characteristic - Value is equal NULL");
         }
-        return;
     }
 }
