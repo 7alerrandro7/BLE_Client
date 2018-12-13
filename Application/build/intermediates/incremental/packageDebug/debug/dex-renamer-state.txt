@@ -1,4 +1,4 @@
-#Mon Dec 10 15:15:54 BRST 2018
+#Wed Dec 12 23:48:40 BRST 2018
 path.1=classes.dex
 path.0=classes.dex
 renamed.5=classes6.dex
@@ -7,12 +7,12 @@ renamed.3=classes4.dex
 renamed.2=classes3.dex
 renamed.1=classes2.dex
 renamed.0=classes.dex
-base.5=C\:\\Users\\aless\\Documents\\_Dev\\Projeto_Final\\BLE_Client\\Application\\build\\intermediates\\transforms\\dexMerger\\debug\\53
-base.4=C\:\\Users\\aless\\Documents\\_Dev\\Projeto_Final\\BLE_Client\\Application\\build\\intermediates\\transforms\\dexMerger\\debug\\50
-base.3=C\:\\Users\\aless\\Documents\\_Dev\\Projeto_Final\\BLE_Client\\Application\\build\\intermediates\\transforms\\dexMerger\\debug\\55
-base.2=C\:\\Users\\aless\\Documents\\_Dev\\Projeto_Final\\BLE_Client\\Application\\build\\intermediates\\transforms\\dexMerger\\debug\\52
-base.1=C\:\\Users\\aless\\Documents\\_Dev\\Projeto_Final\\BLE_Client\\Application\\build\\intermediates\\transforms\\dexMerger\\debug\\54
-base.0=C\:\\Users\\aless\\Documents\\_Dev\\Projeto_Final\\BLE_Client\\Application\\build\\intermediates\\transforms\\dexMerger\\debug\\51
+base.5=E\:\\Documentos\\_Dev\\BLE_Client\\Application\\build\\intermediates\\transforms\\dexMerger\\debug\\12
+base.4=E\:\\Documentos\\_Dev\\BLE_Client\\Application\\build\\intermediates\\transforms\\dexMerger\\debug\\15
+base.3=E\:\\Documentos\\_Dev\\BLE_Client\\Application\\build\\intermediates\\transforms\\dexMerger\\debug\\16
+base.2=E\:\\Documentos\\_Dev\\BLE_Client\\Application\\build\\intermediates\\transforms\\dexMerger\\debug\\13
+base.1=E\:\\Documentos\\_Dev\\BLE_Client\\Application\\build\\intermediates\\transforms\\dexMerger\\debug\\14
+base.0=E\:\\Documentos\\_Dev\\BLE_Client\\Application\\build\\intermediates\\transforms\\dexMerger\\debug\\11
 path.5=classes.dex
 path.4=classes.dex
 path.3=classes.dex
